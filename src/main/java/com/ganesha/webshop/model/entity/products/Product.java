@@ -27,6 +27,9 @@ public class Product {
     @Column(nullable = false, name = "product_description")
     private String productDescription;
 
+    @Column(nullable = false, name = "price")
+    private double price;
+
     @ManyToMany
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
