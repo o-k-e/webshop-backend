@@ -1,7 +1,7 @@
 package com.ganesha.webshop.service.mapper;
 
 import com.ganesha.webshop.model.dto.response.ProductResponse;
-import com.ganesha.webshop.model.entity.products.Product;
+import com.ganesha.webshop.model.entity.product.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

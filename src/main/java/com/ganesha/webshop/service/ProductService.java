@@ -1,15 +1,12 @@
 package com.ganesha.webshop.service;
 
-import com.ganesha.webshop.model.dto.response.ErrorResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
-import com.ganesha.webshop.model.entity.products.Product;
+import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.exception.ProductNotFoundException;
 import com.ganesha.webshop.repository.ProductRepository;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 

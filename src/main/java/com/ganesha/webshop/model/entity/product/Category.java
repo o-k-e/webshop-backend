@@ -1,4 +1,4 @@
-package com.ganesha.webshop.model.entity.products;
+package com.ganesha.webshop.model.entity.product;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
