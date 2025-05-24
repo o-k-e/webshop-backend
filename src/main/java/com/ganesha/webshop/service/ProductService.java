@@ -20,9 +20,9 @@ public class ProductService {
     private final ProductResponseMapper productResponseMapper;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductResponseMapper productResponseMapper) {
         this.productRepository = productRepository;
-        this.productResponseMapper = new ProductResponseMapper();
+        this.productResponseMapper = productResponseMapper;
     }
 
     public List<ProductResponse> findAll() {
