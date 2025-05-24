@@ -18,14 +18,16 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
 
-    @Column(nullable = false, name = "product_name")
+    @Column(nullable = false)
     private String productName;
 
-    @Column(nullable = false, name = "product_description")
+    @Column(nullable = false)
     private String productDescription;
+
+    @Column(nullable = false)
+    private double price;
 
     @ManyToMany
     @JoinTable(name = "product_category",
