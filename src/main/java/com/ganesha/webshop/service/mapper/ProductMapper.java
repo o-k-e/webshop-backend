@@ -15,12 +15,13 @@ public class ProductMapper {
         product.setId(productResponse.id());
         product.setProductName(productResponse.productName());
         product.setProductDescription(productResponse.productDescription());
+        product.setPrice(productResponse.price());
 //        product.setCategories(productResponse);
 
         return product;
     }
 
-    public List<Product> mapToProducts(List<ProductResponse> productResponses) {
+    public List<Product> mapToProductList(List<ProductResponse> productResponses) {
         return productResponses.stream()
                 .map(this::mapToProduct)
                 .toList();
