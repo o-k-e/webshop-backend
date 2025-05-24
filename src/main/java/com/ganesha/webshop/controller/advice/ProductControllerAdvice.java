@@ -13,7 +13,7 @@ public class ProductControllerAdvice {
 
     @ResponseBody
     @ExceptionHandler(ProductNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse productNotFoundHandler(ProductNotFoundException ex) {
         return new ErrorResponse(ex.getMessage());
     }
