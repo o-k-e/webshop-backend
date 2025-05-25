@@ -5,5 +5,7 @@ import java.util.List;
 public record ProductResponse(Long id,
                               String productName,
                               String productDescription,
-                              double price
+                              double price,
+                              List<ProductImageResponse> images,
+                              List<CategoryResponseWithIdAndName> categories
 ) {}
