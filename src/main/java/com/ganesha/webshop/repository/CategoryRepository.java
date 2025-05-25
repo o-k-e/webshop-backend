@@ -1,10 +1,9 @@
 package com.ganesha.webshop.repository;
 
-import com.ganesha.webshop.model.entity.product.Product;
+import com.ganesha.webshop.model.entity.product.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
