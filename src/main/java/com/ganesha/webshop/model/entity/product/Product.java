@@ -23,6 +23,7 @@ public class Product {
     @Column(nullable = false)
     private String productName;
 
+    @Lob //Large Object - ensures longer text saved in db
     @Column(nullable = false)
     private String productDescription;
 
@@ -33,7 +34,7 @@ public class Product {
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy = "product" -> ProductImage.java -> private Product product
     @OrderBy("id ASC")
