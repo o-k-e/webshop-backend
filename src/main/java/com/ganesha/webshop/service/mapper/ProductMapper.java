@@ -1,28 +1,28 @@
-package com.ganesha.webshop.service.mapper;
-
-import com.ganesha.webshop.model.dto.response.ProductResponse;
-import com.ganesha.webshop.model.entity.product.Product;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-
-@Component
-public class ProductMapper {
-
-    public Product mapToProduct(ProductResponse productResponse) {
-        Product product = new Product();
-        product.setId(productResponse.id());
-        product.setProductName(productResponse.productName());
-        product.setProductDescription(productResponse.productDescription());
-        product.setPrice(productResponse.price());
-//        product.setCategories(productResponse);
-
-        return product;
-    }
-
-    public List<Product> mapToProductList(List<ProductResponse> productResponses) {
-        return productResponses.stream()
-                .map(this::mapToProduct)
-                .toList();
-    }
-}
+//package com.ganesha.webshop.service.mapper;
+//
+//import com.ganesha.webshop.model.dto.response.ProductResponse;
+//import com.ganesha.webshop.model.entity.product.Product;
+//import org.springframework.stereotype.Component;
+//
+//import java.util.List;
+//
+//@Component
+//public class ProductMapper {
+//
+//    public Product mapToProduct(ProductResponse productResponse) {
+//        Product product = new Product();
+//        product.setId(productResponse.id());
+//        product.setProductName(productResponse.productName());
+//        product.setProductDescription(productResponse.productDescription());
+//        product.setPrice(productResponse.price());
+////        product.setCategories(productResponse);
+//
+//        return product;
+//    }
+//
+//    public List<Product> mapToProductList(List<ProductResponse> productResponses) {
+//        return productResponses.stream()
+//                .map(this::mapToProduct)
+//                .toList();
+//    }
+//}
