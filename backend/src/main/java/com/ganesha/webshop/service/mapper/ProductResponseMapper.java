@@ -1,7 +1,7 @@
 package com.ganesha.webshop.service.mapper;
 
 import com.ganesha.webshop.model.dto.response.ProductImageResponse;
-import com.ganesha.webshop.model.dto.response.ProductResponse;
+import com.ganesha.webshop.model.dto.response.ProductResponseWithFilteredCategories;
 import com.ganesha.webshop.model.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,13 +18,13 @@ public class ProductResponseMapper {
         this.categoryResponseMapper = categoryResponseMapper;
     }
 
-    public ProductResponse mapToProductResponse(Product product) {
+    public ProductResponseWithFilteredCategories mapToProductResponse(Product product) {
 
         List<ProductImageResponse> imageResponses = product.getImages().stream()
                 .map(image -> new ProductImageResponse(image.getId(), image.getUrl()))
                 .toList();
 
-        return new ProductResponse(
+        return new ProductResponseWithFilteredCategories(
                 product.getId(),
                 product.getProductName(),
                 product.getProductDescription(),
@@ -34,7 +34,7 @@ public class ProductResponseMapper {
         );
     }
 
-    public List<ProductResponse> mapToProductResponseList(List<Product> products) {
+    public List<ProductResponseWithFilteredCategories> mapToProductResponseList(List<Product> products) {
         return products.stream()
                 .map(this::mapToProductResponse)
                 .toList();
