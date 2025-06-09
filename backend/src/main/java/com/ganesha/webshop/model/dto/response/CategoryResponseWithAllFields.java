@@ -4,4 +4,4 @@ import java.util.List;
 
 public record CategoryResponseWithAllFields(Long id,
                                             String categoryName,
-                                            List<ProductResponse> products) {}
+                                            List<ProductResponseWithFilteredCategories> products) {}

@@ -1,6 +1,6 @@
 package com.ganesha.webshop.service;
 
-import com.ganesha.webshop.model.dto.response.ProductResponse;
+import com.ganesha.webshop.model.dto.response.ProductResponseWithFilteredCategories;
 import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.exception.ProductNotFoundException;
 import com.ganesha.webshop.repository.ProductRepository;
@@ -22,12 +22,12 @@ public class ProductService {
         this.productResponseMapper = productResponseMapper;
     }
 
-    public List<ProductResponse> findAll() {
+    public List<ProductResponseWithFilteredCategories> findAll() {
         List<Product> products = productRepository.findAll();
         return productResponseMapper.mapToProductResponseList(products);
     }
 
-    public ProductResponse findById(long id) {
+    public ProductResponseWithFilteredCategories findById(long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         return productResponseMapper.mapToProductResponse(product);
     }
