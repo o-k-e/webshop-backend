@@ -1,6 +1,40 @@
-# backend build
-/backend/target/
+# Java-related
+*.class
+*.jar
+*.war
+*.ear
 
-# frontend build
-/frontend/node_modules/
-/frontend/dist/
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Spring Boot
+# Exclude Spring Boot devtools restart directory
+.spring-boot-devtools.properties
+.spring-boot-devtools.restart.*
+
+# Others
+node_modules/
+*.swp
