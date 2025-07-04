@@ -63,11 +63,11 @@ public class DataInitializer {
         roseIncense.setCategories(List.of(scents));
 
         ProductImage img1 = new ProductImage();
-        img1.setUrl("/images/products/incense-nagchampa-1.1.jpeg");
+        img1.setUrl("incense-nagchampa-1.1.jpeg");
         img1.setProduct(roseIncense);
 
         ProductImage img2 = new ProductImage();
-        img2.setUrl("/images/products/incense-nagchampa-1.2.jpeg");
+        img2.setUrl("incense-nagchampa-1.2.jpeg");
         img2.setProduct(roseIncense);
 
         roseIncense.setImages(List.of(img1, img2));
@@ -115,7 +115,7 @@ public class DataInitializer {
         sandalwood.setCategories(List.of(scents));
 
         ProductImage img3 = new ProductImage();
-        img3.setUrl("/images/products/incense-sandalwood-1.1.jpeg");
+        img3.setUrl("incense-sandalwood-1.1.jpeg");
         img3.setProduct(sandalwood);
 
         sandalwood.setImages(List.of(img3));
@@ -133,7 +133,7 @@ public class DataInitializer {
         tongueCleaner.setCategories(List.of(ayurveda));
 
         ProductImage img4 = new ProductImage();
-        img4.setUrl("/images/products/no-image.jpeg");
+        img4.setUrl("no-image.jpeg");
         img4.setProduct(tongueCleaner);
 
         tongueCleaner.setImages(List.of(img4));
@@ -152,7 +152,7 @@ public class DataInitializer {
         sriYantra.setCategories(List.of(vastu));
 
         ProductImage img5 = new ProductImage();
-        img5.setUrl("/images/products/no-image.jpeg");
+        img5.setUrl("no-image.jpeg");
         img5.setProduct(sriYantra);
 
         sriYantra.setImages(List.of(img5));
@@ -171,7 +171,7 @@ public class DataInitializer {
         cushion.setCategories(List.of(yoga));
 
         ProductImage img6 = new ProductImage();
-        img6.setUrl("/images/products/no-image.jpeg");
+        img6.setUrl("no-image.jpeg");
         img6.setProduct(cushion);
 
         cushion.setImages(List.of(img6));
@@ -190,10 +190,10 @@ public class DataInitializer {
         bedcover.setCategories(List.of(home));
 
         ProductImage img7 = new ProductImage();
-        img7.setUrl("/images/products/no-image.jpeg");
+        img7.setUrl("no-image.jpeg");
         img7.setProduct(bedcover);
 
-        tongueCleaner.setImages(List.of(img7));
+        bedcover.setImages(List.of(img7));
 
         productRepository.save(bedcover);
 
@@ -209,7 +209,7 @@ public class DataInitializer {
         tunic.setCategories(List.of(clothes));
 
         ProductImage img8 = new ProductImage();
-        img8.setUrl("/images/products/no-image.jpeg");
+        img8.setUrl("no-image.jpeg");
         img8.setProduct(tunic);
 
         tunic.setImages(List.of(img8));
@@ -228,7 +228,7 @@ public class DataInitializer {
         bracelet.setCategories(List.of(minerals));
 
         ProductImage img9 = new ProductImage();
-        img9.setUrl("/images/products/no-image.jpeg");
+        img9.setUrl("no-image.jpeg");
         img9.setProduct(bracelet);
 
         bracelet.setImages(List.of(img9));
