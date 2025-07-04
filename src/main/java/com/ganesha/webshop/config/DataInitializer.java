@@ -33,9 +33,9 @@ public class DataInitializer {
 
         // Rozsa fustolo
         Product roseIncense = new Product();
-        roseIncense.setProductName("Rózsa füstölő – A szív nyugalmának és a szeretet illata");
+        roseIncense.setProductName("Rózsa füstölő");
         String description = """
-            <p>A rózsa nemcsak a szerelem szimbóluma, hanem az egyik legmagasabb rezgésű illat a természetben.
+            <p>A szív nyugalmának és a szeretet illata. A rózsa nemcsak a szerelem szimbóluma, hanem az egyik legmagasabb rezgésű illat a természetben.
             Lágy, virágos aromája megnyugtatja az elmét, nyitja a szívet, és finoman emeli a hangulatot.
             Kiváló választás érzelmi tisztuláshoz, bensőséges pillanatokhoz vagy egyszerűen a mindennapi kényeztetéshez.</p>
 
@@ -79,8 +79,7 @@ public class DataInitializer {
         Product sandalwood = new Product();
         sandalwood.setProductName("Szantálfa füstölő");
         String description2 = """
-            <h2>Szantálfa füstölő – A nyugalom és spiritualitás illata</h2>
-            <p>A szantálfa meleg, fás, enyhén édeskés illata évszázadok óta a meditáció és spirituális elmélyülés egyik legkedveltebb kísérője. 
+            <p>A nyugalom és spiritualitás illata. A szantálfa meleg, fás, enyhén édeskés illata évszázadok óta a meditáció és spirituális elmélyülés egyik legkedveltebb kísérője. 
             Segít elcsendesíteni az elmét, megteremti a belső béke légkörét, és harmonizálja a tér energiáit.</p>
 
             <h4>Mire számíthatsz:</h4>
