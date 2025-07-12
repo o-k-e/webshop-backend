@@ -1,9 +1,8 @@
 package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.request.NewProductRequest;
-import com.ganesha.webshop.model.dto.request.ProductRequest;
-import com.ganesha.webshop.model.dto.response.NewProductResponse;
-import com.ganesha.webshop.model.dto.response.ProductResponseWithFilteredCategories;
+import com.ganesha.webshop.model.dto.response.ProductIdResponse;
+import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,17 +21,17 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductResponseWithFilteredCategories> getProducts() {
+    public List<ProductResponse> getProducts() {
         return productService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ProductResponseWithFilteredCategories getProductById(@PathVariable long id) {
+    public ProductResponse getProductById(@PathVariable long id) {
         return productService.findById(id);
     }
 
     @PostMapping("/create-product")
-    public NewProductResponse createProduct(@RequestBody NewProductRequest newProductRequest) {
+    public ProductIdResponse createProduct(@RequestBody NewProductRequest newProductRequest) {
         return productService.create(newProductRequest);
     }
 

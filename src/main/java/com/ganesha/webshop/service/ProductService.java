@@ -1,8 +1,8 @@
 package com.ganesha.webshop.service;
 
 import com.ganesha.webshop.model.dto.request.NewProductRequest;
-import com.ganesha.webshop.model.dto.response.NewProductResponse;
-import com.ganesha.webshop.model.dto.response.ProductResponseWithFilteredCategories;
+import com.ganesha.webshop.model.dto.response.ProductIdResponse;
+import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.model.entity.product.Category;
 import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.entity.product.ProductImage;
@@ -26,17 +26,17 @@ public class ProductService {
         this.productResponseMapper = productResponseMapper;
     }
 
-    public List<ProductResponseWithFilteredCategories> findAll() {
+    public List<ProductResponse> findAll() {
         List<Product> products = productRepository.findAll();
         return productResponseMapper.mapToProductResponseList(products);
     }
 
-    public ProductResponseWithFilteredCategories findById(long id) {
+    public ProductResponse findById(long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         return productResponseMapper.mapToProductResponse(product);
     }
 
-    public NewProductResponse create(NewProductRequest newProductRequest) {
+    public ProductIdResponse create(NewProductRequest newProductRequest) {
         Product newProduct = new Product();
         newProduct.setProductName(newProductRequest.productName());
         newProduct.setProductDescription(newProductRequest.description());
@@ -51,6 +51,6 @@ public class ProductService {
 
         productRepository.save(newProduct);
 
-        return new NewProductResponse(newProduct.getId());
+        return new ProductIdResponse(newProduct.getId());
     }
 }
