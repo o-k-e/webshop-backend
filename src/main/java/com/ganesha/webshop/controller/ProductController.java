@@ -4,6 +4,7 @@ import com.ganesha.webshop.model.dto.request.NewProductRequest;
 import com.ganesha.webshop.model.dto.response.ProductIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,8 @@ public class ProductController {
         return productService.findById(id);
     }
 
-    @PostMapping("/create-product")
-    public ProductIdResponse createProduct(@RequestBody NewProductRequest newProductRequest) {
+    @PostMapping
+    public ProductIdResponse createProduct(@RequestBody @Valid NewProductRequest newProductRequest) {
         return productService.create(newProductRequest);
     }
 
