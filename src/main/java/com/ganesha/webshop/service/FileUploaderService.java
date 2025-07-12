@@ -29,7 +29,7 @@ public class FileUploaderService {
             String[] parts = base64Image.split(",");
             String base64Data = (parts.length > 1) ? parts[1] : parts[0];
             byte[] imageBytes = Base64.getDecoder().decode(base64Data); // string-et binaris adatta alakitja
-            String fileName = UUID.randomUUID() + filename; // elkerulni h 2 ugyanolyan nevu file feltoltodjon, ezert UUID lesz az image neve elmentve a serveren?
+            String fileName = UUID.randomUUID() + "-" + filename; // elkerulni h 2 ugyanolyan nevu file feltoltodjon, ezert UUID lesz az image neve elmentve a serveren?
             File file = new File(uploadDir, fileName);
 
             try (FileOutputStream fos = new FileOutputStream(file)) {

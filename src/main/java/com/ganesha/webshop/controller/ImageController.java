@@ -1,6 +1,7 @@
 package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.request.Base64ImageUploadRequest;
+import com.ganesha.webshop.model.dto.response.UploadedImageResponse;
 import com.ganesha.webshop.service.FileUploaderService;
 import com.ganesha.webshop.service.ImageService;
 import lombok.RequiredArgsConstructor;
@@ -51,9 +52,10 @@ public class ImageController {
     }
 
     @PostMapping("/upload-image")
-    public ResponseEntity<String> uploadBase64Image(@RequestBody Base64ImageUploadRequest request) throws IOException {
-        fileUploaderService.upload(request.filename(), request.base64());
-        return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully");
+    public ResponseEntity<UploadedImageResponse> uploadBase64Image(@RequestBody Base64ImageUploadRequest request) throws IOException {
+        String uploadedFilename = fileUploaderService.upload(request.filename(), request.base64());
+        UploadedImageResponse uploadedImageResponse = new UploadedImageResponse(uploadedFilename);
+        return ResponseEntity.status(HttpStatus.CREATED).body(uploadedImageResponse);
     }
 }
 

@@ -1,7 +1,11 @@
 package com.ganesha.webshop.service;
 
+import com.ganesha.webshop.model.dto.request.NewProductRequest;
+import com.ganesha.webshop.model.dto.response.NewProductResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponseWithFilteredCategories;
+import com.ganesha.webshop.model.entity.product.Category;
 import com.ganesha.webshop.model.entity.product.Product;
+import com.ganesha.webshop.model.entity.product.ProductImage;
 import com.ganesha.webshop.model.exception.ProductNotFoundException;
 import com.ganesha.webshop.repository.ProductRepository;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
@@ -30,5 +34,23 @@ public class ProductService {
     public ProductResponseWithFilteredCategories findById(long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         return productResponseMapper.mapToProductResponse(product);
+    }
+
+    public NewProductResponse create(NewProductRequest newProductRequest) {
+        Product newProduct = new Product();
+        newProduct.setProductName(newProductRequest.productName());
+        newProduct.setProductDescription(newProductRequest.description());
+        newProduct.setPrice(newProductRequest.price());
+        Category newCategory = new Category();
+        newCategory.setId(newProductRequest.categoryId());
+        newProduct.setCategories(List.of(newCategory));
+        ProductImage newProductImage = new ProductImage();
+        newProductImage.setUrl(newProductRequest.imageFileName());
+        newProduct.setImages(List.of(newProductImage));
+        newProductImage.setProduct(newProduct);
+
+        productRepository.save(newProduct);
+
+        return new NewProductResponse(newProduct.getId());
     }
 }
