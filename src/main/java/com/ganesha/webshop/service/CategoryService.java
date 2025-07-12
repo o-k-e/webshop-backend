@@ -1,6 +1,6 @@
 package com.ganesha.webshop.service;
 
-import com.ganesha.webshop.model.dto.response.CategoryResponseWithIdAndName;
+import com.ganesha.webshop.model.dto.response.CategoryWithIdAndNameResponse;
 import com.ganesha.webshop.model.entity.product.Category;
 import com.ganesha.webshop.model.exception.CategoryNotFoundException;
 import com.ganesha.webshop.repository.CategoryRepository;
@@ -23,12 +23,12 @@ public class CategoryService {
         this.categoryResponseMapper = categoryResponseMapper;
     }
 
-    public List<CategoryResponseWithIdAndName> findAll() {
+    public List<CategoryWithIdAndNameResponse> findAll() {
         List<Category> categories = categoryRepository.findAll();
         return categoryResponseMapper.mapToCategoryResponseListWithIdAndName(categories);
     }
 
-    public CategoryResponseWithIdAndName findById(Long id) {
+    public CategoryWithIdAndNameResponse findById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
         return categoryResponseMapper.mapToCategoryResponseWithIdAndName(category);
     }

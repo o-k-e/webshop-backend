@@ -1,5 +1,5 @@
 package com.ganesha.webshop.model.dto.response;
 
-public record CategoryResponseWithIdAndName(Long id,
+public record CategoryWithIdAndNameResponse(Long id,
                                             String categoryName) {
 }
