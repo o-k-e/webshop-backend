@@ -38,19 +38,19 @@ public class DataInitializer {
             <p>A szív nyugalmának és a szeretet illata. A rózsa nemcsak a szerelem szimbóluma, hanem az egyik legmagasabb rezgésű illat a természetben.
             Lágy, virágos aromája megnyugtatja az elmét, nyitja a szívet, és finoman emeli a hangulatot.
             Kiváló választás érzelmi tisztuláshoz, bensőséges pillanatokhoz vagy egyszerűen a mindennapi kényeztetéshez.</p>
-
+            <br />
             <h4>Miért szeretik oly sokan?</h4>
             <ul>
               <li>Édesen virágos, mégsem tolakodó illat</li>
               <li>Segít oldani a feszültséget, támogatja az önszeretetet</li>
               <li>Harmonizálja a légkört, meghittebbé teszi az otthonodat</li>
             </ul>
-
+            <br />
             <h4>Natur's Nest – Rózsa füstölő</h4>
             <p>Lágy illat, mély érzelmek – természetesen.
             A Natur's Nest Rózsa füstölő a klasszikus rózsa illat természetes, harmonikus változata – nem tolakodó, hanem finoman körbeölel.
             Tökéletes választás, ha szeretnéd megnyugtatni az elmédet, megnyitni a szívedet vagy egyszerűen csak szebbé tenni a pillanatot.</p>
-
+            <br />
             <h4>Illatprofil:</h4>
             <ul>
               <li>Virágos, édes és tiszta rózsaillat</li>
@@ -81,27 +81,27 @@ public class DataInitializer {
         String description2 = """
             <p>A nyugalom és spiritualitás illata. A szantálfa meleg, fás, enyhén édeskés illata évszázadok óta a meditáció és spirituális elmélyülés egyik legkedveltebb kísérője. 
             Segít elcsendesíteni az elmét, megteremti a belső béke légkörét, és harmonizálja a tér energiáit.</p>
-
+            <br />
             <h4>Mire számíthatsz:</h4>
             <ul>
               <li>Mélyen megnyugtató, enyhén balzsamos illat</li>
               <li>Hosszan tartó, kiegyensúlyozott aroma</li>
               <li>Ideális meditációhoz, relaxációhoz vagy akár egy csendes estéhez</li>
             </ul>
-
+            <br />
             <h4>Natur's Nest – Chandan füstölő</h4>
             <p>Spirituális mélység és földelő nyugalom egy illatban.
             A Chandan, vagyis szantálfa füstölő a Natur's Nest egyik legismertebb és legnemesebb illata. Meleg, balzsamos, 
             enyhén fűszeres aromája segít elcsendesíteni az elmét, támogatja a mélyebb meditációt és harmonizálja a teret. 
             Ez az illat nemcsak tisztít, hanem emel is – testileg, lelkileg, szellemileg.</p>
-
+            <br />
             <h4>Illatprofil:</h4>
             <ul>
               <li>Meleg, fás, enyhén édes-balzsamos karakte</li>
               <li>Kézzel készített természetes alapanyagokból</li>
               <li>Hosszan tartó, finoman burkoló illatfelhő</li>
             </ul>
-            
+            <br />
             <h4>Mire ajánljuk:</h4>
             <ul>
               <li>Meditációhoz, jógához, spirituális elmélyüléshez</li>
