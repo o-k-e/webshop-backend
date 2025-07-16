@@ -8,6 +8,7 @@ import com.ganesha.webshop.repository.ProductRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -60,7 +61,7 @@ public class DataInitializer {
         """;
         roseIncense.setProductDescription(description);
         roseIncense.setPrice(780);
-        roseIncense.setCategories(List.of(scents));
+        roseIncense.setCategories(new ArrayList<>(List.of(scents)));
 
         ProductImage img1 = new ProductImage();
         img1.setUrl("rozsa-fustolo-1.1.jpeg");
@@ -70,7 +71,7 @@ public class DataInitializer {
         img2.setUrl("rozsa-fustolo-1.2.jpeg");
         img2.setProduct(roseIncense);
 
-        roseIncense.setImages(List.of(img1, img2));
+        roseIncense.setImages(new ArrayList<>(List.of(img1, img2)));
 
         productRepository.save(roseIncense);
 
@@ -112,13 +113,13 @@ public class DataInitializer {
                 """;
         sandalwood.setProductDescription(description2);
         sandalwood.setPrice(780);
-        sandalwood.setCategories(List.of(scents));
+        sandalwood.setCategories(new ArrayList<>(List.of(scents)));
 
         ProductImage img3 = new ProductImage();
         img3.setUrl("incense-sandalwood-1.1.jpeg");
         img3.setProduct(sandalwood);
 
-        sandalwood.setImages(List.of(img3));
+        sandalwood.setImages(new ArrayList<>(List.of(img3)));
         productRepository.save(sandalwood);
 
 // Ayurveda
@@ -130,13 +131,13 @@ public class DataInitializer {
         tongueCleaner.setProductName("Réz nyelvkaparó");
         tongueCleaner.setProductDescription("Az ayurvédikus higiénia eszköze a szájban lerakódott lepedék eltávolítására. Reggeli használata frissíti a leheletet és támogatja az emésztést.");
         tongueCleaner.setPrice(1900);
-        tongueCleaner.setCategories(List.of(ayurveda));
+        tongueCleaner.setCategories(new ArrayList<>(List.of(ayurveda)));
 
         ProductImage img4 = new ProductImage();
         img4.setUrl("rez-nyelvkaparo.jpeg");
         img4.setProduct(tongueCleaner);
 
-        tongueCleaner.setImages(List.of(img4));
+        tongueCleaner.setImages(new ArrayList<>(List.of(img4)));
         productRepository.save(tongueCleaner);
 
 
@@ -149,13 +150,13 @@ public class DataInitializer {
         sriYantra.setProductName("Sri Yantra");
         sriYantra.setProductDescription("A Sri Yantra a Vastu egyik legerősebb szimbóluma, amely a bőséget, spirituális fejlődést és harmonikus energiát hoz a térbe.");
         sriYantra.setPrice(4500);
-        sriYantra.setCategories(List.of(vastu));
+        sriYantra.setCategories(new ArrayList<>(List.of(vastu)));
 
         ProductImage img5 = new ProductImage();
         img5.setUrl("sri-yantra.jpeg");
         img5.setProduct(sriYantra);
 
-        sriYantra.setImages(List.of(img5));
+        sriYantra.setImages(new ArrayList<>(List.of(img5)));
 
         productRepository.save(sriYantra);
 
@@ -168,13 +169,13 @@ public class DataInitializer {
         cushion.setProductName("Meditációs párna");
         cushion.setProductDescription("Természetes bio töltettel készült párna, amely stabil és kényelmes alátámasztást biztosít hosszabb ülő gyakorlatokhoz.");
         cushion.setPrice(14500);
-        cushion.setCategories(List.of(yoga));
+        cushion.setCategories(new ArrayList<>(List.of(yoga)));
 
         ProductImage img6 = new ProductImage();
         img6.setUrl("meditacios-parna.jpeg");
         img6.setProduct(cushion);
 
-        cushion.setImages(List.of(img6));
+        cushion.setImages(new ArrayList<>(List.of(img6)));
 
         productRepository.save(cushion);
 
@@ -187,13 +188,13 @@ public class DataInitializer {
         bedcover.setProductName("Mandala mintás ágyterítő");
         bedcover.setProductDescription("Indiai pamut ágyterítő mandala mintával. Díszítő és funkcionális célokra is használható, 240x210 cm-es méret.");
         bedcover.setPrice(9500);
-        bedcover.setCategories(List.of(home));
+        bedcover.setCategories(new ArrayList<>(List.of(home)));
 
         ProductImage img7 = new ProductImage();
         img7.setUrl("mandala-mintas-agyterito.jpeg");
         img7.setProduct(bedcover);
 
-        bedcover.setImages(List.of(img7));
+        bedcover.setImages(new ArrayList<>(List.of(img7)));
 
         productRepository.save(bedcover);
 
@@ -206,13 +207,13 @@ public class DataInitializer {
         tunic.setProductName("Női indiai tunika");
         tunic.setProductDescription("Könnyű, légies és 100% pamut anyagból készült tunika, amely ideális nyári viseletként vagy jógázáshoz.");
         tunic.setPrice(9500);
-        tunic.setCategories(List.of(clothes));
+        tunic.setCategories(new ArrayList<>(List.of(clothes)));
 
         ProductImage img8 = new ProductImage();
         img8.setUrl("noi-indiai-tunika.jpeg");
         img8.setProduct(tunic);
 
-        tunic.setImages(List.of(img8));
+        tunic.setImages(new ArrayList<>(List.of(img8)));
 
         productRepository.save(tunic);
 
@@ -225,13 +226,13 @@ public class DataInitializer {
         bracelet.setProductName("Hegyi kristály karkötő");
         bracelet.setProductDescription("A hegyi kristály tisztító és energetizáló hatásáról ismert ásvány. A karkötő a csuklón viselve támogatja a fókuszt és belső egyensúlyt.");
         bracelet.setPrice(4500);
-        bracelet.setCategories(List.of(minerals));
+        bracelet.setCategories(new ArrayList<>(List.of(minerals)));
 
         ProductImage img9 = new ProductImage();
         img9.setUrl("hegyikristaly-karkoto.jpeg");
         img9.setProduct(bracelet);
 
-        bracelet.setImages(List.of(img9));
+        bracelet.setImages(new ArrayList<>(List.of(img9)));
 
         productRepository.save(bracelet);
 

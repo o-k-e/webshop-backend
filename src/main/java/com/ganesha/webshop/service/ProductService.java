@@ -1,6 +1,7 @@
 package com.ganesha.webshop.service;
 
 import com.ganesha.webshop.model.dto.request.NewProductRequest;
+import com.ganesha.webshop.model.dto.request.UpdateProductRequest;
 import com.ganesha.webshop.model.dto.response.ProductIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.model.entity.product.Category;
@@ -14,8 +15,8 @@ import com.ganesha.webshop.service.mapper.NewProductMapper;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -48,5 +49,35 @@ public class ProductService {
         Product product = newProductMapper.mapToEntity(newProductRequest, category);
         productRepository.save(product);
         return new ProductIdResponse(product.getId());
+    }
+
+    public ProductResponse update(long id, UpdateProductRequest updateProductRequest) {
+        Product productToUpdate = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        productToUpdate.setProductName(updateProductRequest.productName());
+        productToUpdate.setProductDescription(updateProductRequest.productDescription());
+        productToUpdate.setPrice(updateProductRequest.price());
+
+//        List<Long> categoryIds = Optional.ofNullable(updateProductRequest.categoryIds())
+//                .orElseThrow(() -> new IllegalArgumentException("categoryIds must not be null"));
+
+        List<Category> categories = updateProductRequest.categoryIds().stream()
+                .map(categoryId -> categoryRepository.findById(categoryId)
+                        .orElseThrow(() -> new CategoryNotFoundException(categoryId)))
+                .collect(Collectors.toList());
+        productToUpdate.setCategories(categories);
+
+        List<ProductImage> newImages = updateProductRequest.imageFileNames().stream()
+                .map((fileName -> {
+                    ProductImage image = new ProductImage();
+                    image.setUrl(fileName);
+                    image.setProduct(productToUpdate);
+                    return image;
+                })).collect(Collectors.toList());
+
+        productToUpdate.getImages().clear();
+        productToUpdate.getImages().addAll(newImages);
+
+        productRepository.save(productToUpdate);
+        return productResponseMapper.mapToProductResponse(productToUpdate);
     }
 }

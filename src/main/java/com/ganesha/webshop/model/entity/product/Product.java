@@ -30,13 +30,13 @@ public class Product {
     @Column(nullable = false)
     private double price;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy = "product" -> ProductImage.java -> private Product product
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) //mappedBy = "product" -> ProductImage.java -> private Product product
     @OrderBy("id ASC")
     private List<ProductImage> images = new ArrayList<>();
 

@@ -6,6 +6,7 @@ import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.entity.product.ProductImage;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -16,12 +17,12 @@ public class NewProductMapper {
         product.setProductName(newProductRequest.productName());
         product.setProductDescription(newProductRequest.description());
         product.setPrice(newProductRequest.price());
-        product.setCategories(List.of(category));
+        product.setCategories(new ArrayList<>(List.of(category)));
 
         ProductImage image = new ProductImage();
         image.setUrl(newProductRequest.imageFileName());
         image.setProduct(product);
-        product.setImages(List.of(image));
+        product.setImages(new ArrayList<>(List.of(image)));
 
         return product;
     }
