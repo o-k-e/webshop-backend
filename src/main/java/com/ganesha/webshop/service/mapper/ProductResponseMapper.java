@@ -29,9 +29,9 @@ public class ProductResponseMapper {
                 product.getProductName(),
                 product.getProductDescription(),
                 product.getPrice(),
-                imageResponses,
-                categoryResponseMapper.mapToCategoryResponseListWithIdAndName(product.getCategories())
-        );
+                categoryResponseMapper.mapToCategoryResponseListWithIdAndName(product.getCategories()),
+                imageResponses
+                );
     }
 
     public List<ProductResponse> mapToProductResponseList(List<Product> products) {

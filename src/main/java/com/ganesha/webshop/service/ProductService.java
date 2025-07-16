@@ -15,7 +15,11 @@ import com.ganesha.webshop.service.mapper.NewProductMapper;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,13 +29,15 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductResponseMapper productResponseMapper;
     private final NewProductMapper newProductMapper;
+    private final ImageService imageService;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductResponseMapper productResponseMapper, CategoryRepository categoryRepository, NewProductMapper newProductMapper) {
+    public ProductService(ProductRepository productRepository, ProductResponseMapper productResponseMapper, CategoryRepository categoryRepository, NewProductMapper newProductMapper, ImageService imageService) {
         this.productRepository = productRepository;
         this.productResponseMapper = productResponseMapper;
         this.categoryRepository = categoryRepository;
         this.newProductMapper = newProductMapper;
+        this.imageService = imageService;
     }
 
     public List<ProductResponse> findAll() {
@@ -57,24 +63,34 @@ public class ProductService {
         productToUpdate.setProductDescription(updateProductRequest.productDescription());
         productToUpdate.setPrice(updateProductRequest.price());
 
-//        List<Long> categoryIds = Optional.ofNullable(updateProductRequest.categoryIds())
-//                .orElseThrow(() -> new IllegalArgumentException("categoryIds must not be null"));
-
         List<Category> categories = updateProductRequest.categoryIds().stream()
                 .map(categoryId -> categoryRepository.findById(categoryId)
                         .orElseThrow(() -> new CategoryNotFoundException(categoryId)))
                 .collect(Collectors.toList());
+
         productToUpdate.setCategories(categories);
 
-        List<ProductImage> newImages = updateProductRequest.imageFileNames().stream()
-                .map((fileName -> {
-                    ProductImage image = new ProductImage();
-                    image.setUrl(fileName);
-                    image.setProduct(productToUpdate);
-                    return image;
-                })).collect(Collectors.toList());
+        List<ProductImage> existingImages = productToUpdate.getImages();
+        List<String> existingFileNames = existingImages.stream()
+                .map(image -> image.getUrl())
+                .collect(Collectors.toList());
 
-        productToUpdate.getImages().clear();
+        List<ProductImage> newImages = updateProductRequest.imageFileNames().stream()
+                .filter(imageName -> !existingFileNames.contains(imageName))
+                .map((fileName -> {
+                    Optional<File> fileOptional = imageService.serveFile(fileName);
+                    if (fileOptional.isEmpty()) {
+                        // megtortenhet hogy nem mentette el? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
+                        return null;
+                    }
+                    ProductImage newImage = new ProductImage();
+                    newImage.setUrl(fileName);
+                    newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
+                    return newImage;
+                }))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
         productToUpdate.getImages().addAll(newImages);
 
         productRepository.save(productToUpdate);
