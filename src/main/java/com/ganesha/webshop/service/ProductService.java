@@ -59,41 +59,54 @@ public class ProductService {
 
     public ProductResponse update(long id, UpdateProductRequest updateProductRequest) {
         Product productToUpdate = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+
         productToUpdate.setProductName(updateProductRequest.productName());
         productToUpdate.setProductDescription(updateProductRequest.productDescription());
         productToUpdate.setPrice(updateProductRequest.price());
 
-        List<Category> categories = updateProductRequest.categoryIds().stream()
-                .map(categoryId -> categoryRepository.findById(categoryId)
-                        .orElseThrow(() -> new CategoryNotFoundException(categoryId)))
-                .collect(Collectors.toList());
-
+        List<Category> categories = findCategories(updateProductRequest);
         productToUpdate.setCategories(categories);
 
-        List<ProductImage> existingImages = productToUpdate.getImages();
-        List<String> existingFileNames = existingImages.stream()
-                .map(image -> image.getUrl())
-                .collect(Collectors.toList());
+        List<String> existingFileNames = getExistingFileNames(productToUpdate);
+        List<ProductImage> newImages = extractValidNewImages(updateProductRequest, existingFileNames, productToUpdate);
+        productToUpdate.getImages().addAll(newImages);
 
+        productRepository.save(productToUpdate);
+
+        return productResponseMapper.mapToProductResponse(productToUpdate);
+    }
+
+    public List<Category> findCategories(UpdateProductRequest updateProductRequest) {
+
+        return updateProductRequest.categoryIds().stream()
+                .map(id -> categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id)))
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getExistingFileNames(Product productToUpdate) {
+        List<ProductImage> existingImages = productToUpdate.getImages();
+
+        return existingImages.stream()
+                .map(ProductImage::getUrl)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductImage> extractValidNewImages(UpdateProductRequest updateProductRequest, List<String> existingFileNames, Product productToUpdate) {
         List<ProductImage> newImages = updateProductRequest.imageFileNames().stream()
-                .filter(imageName -> !existingFileNames.contains(imageName))
-                .map((fileName -> {
+                .filter(existingFileName -> !existingFileNames.contains(existingFileName))
+                .map(fileName  -> {
                     Optional<File> fileOptional = imageService.serveFile(fileName);
                     if (fileOptional.isEmpty()) {
-                        // megtortenhet hogy nem mentette el? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
+                        // megtortenhet hogy nem mentette el? Frontend ellenorzi ezt majd? de backenden mindenkepp kell ellenoriznie? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
                         return null;
                     }
                     ProductImage newImage = new ProductImage();
                     newImage.setUrl(fileName);
                     newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
                     return newImage;
-                }))
+                })
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-
-        productToUpdate.getImages().addAll(newImages);
-
-        productRepository.save(productToUpdate);
-        return productResponseMapper.mapToProductResponse(productToUpdate);
+           return newImages;
     }
 }
