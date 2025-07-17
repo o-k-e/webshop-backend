@@ -8,6 +8,7 @@ import com.ganesha.webshop.model.entity.product.Category;
 import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.entity.product.ProductImage;
 import com.ganesha.webshop.model.exception.CategoryNotFoundException;
+import com.ganesha.webshop.model.exception.ImageFileNotFoundException;
 import com.ganesha.webshop.model.exception.ProductNotFoundException;
 import com.ganesha.webshop.repository.CategoryRepository;
 import com.ganesha.webshop.repository.ProductRepository;
@@ -15,6 +16,7 @@ import com.ganesha.webshop.service.mapper.NewProductMapper;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
@@ -57,6 +59,7 @@ public class ProductService {
         return new ProductIdResponse(product.getId());
     }
 
+    @Transactional
     public ProductResponse update(long id, UpdateProductRequest updateProductRequest) {
         Product productToUpdate = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
 
@@ -98,14 +101,13 @@ public class ProductService {
                     Optional<File> fileOptional = imageService.serveFile(fileName);
                     if (fileOptional.isEmpty()) {
                         // megtortenhet hogy nem mentette el? Frontend ellenorzi ezt majd? de backenden mindenkepp kell ellenoriznie? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
-                        return null;
+                        throw new ImageFileNotFoundException(fileName);
                     }
                     ProductImage newImage = new ProductImage();
                     newImage.setUrl(fileName);
                     newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
                     return newImage;
                 })
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
            return newImages;
     }
