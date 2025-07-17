@@ -6,6 +6,7 @@ public record ProductResponse(Long id,
                               String productName,
                               String productDescription,
                               double price,
-                              List<ProductImageResponse> images,
-                              List<CategoryWithIdAndNameResponse> categories
+                              List<CategoryWithIdAndNameResponse> categories,
+                              List<ProductImageResponse> images
+
 ) {}

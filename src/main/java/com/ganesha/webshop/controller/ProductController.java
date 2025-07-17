@@ -1,6 +1,7 @@
 package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.request.NewProductRequest;
+import com.ganesha.webshop.model.dto.request.UpdateProductRequest;
 import com.ganesha.webshop.model.dto.response.ProductIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.service.ProductService;
@@ -34,6 +35,11 @@ public class ProductController {
     @PostMapping
     public ProductIdResponse createProduct(@RequestBody @Valid NewProductRequest newProductRequest) {
         return productService.create(newProductRequest);
+    }
+
+    @PutMapping("/{id}")
+    public ProductResponse updateProduct(@PathVariable long id, @RequestBody @Valid UpdateProductRequest updateProductRequest) {
+        return productService.update(id, updateProductRequest);
     }
 
 }
