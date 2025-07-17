@@ -1,6 +1,5 @@
 package com.ganesha.webshop.service.mapper;
 
-import com.ganesha.webshop.model.dto.response.ProductImageResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.model.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +11,15 @@ import java.util.List;
 public class ProductResponseMapper {
 
     private final CategoryResponseMapper categoryResponseMapper;
+    private final ProductImageResponseMapper productImageResponseMapper;
 
     @Autowired
-    public ProductResponseMapper(CategoryResponseMapper categoryResponseMapper) {
+    public ProductResponseMapper(CategoryResponseMapper categoryResponseMapper, ProductImageResponseMapper productImageResponseMapper) {
         this.categoryResponseMapper = categoryResponseMapper;
+        this.productImageResponseMapper = productImageResponseMapper;
     }
 
     public ProductResponse mapToProductResponse(Product product) {
-
-        List<ProductImageResponse> imageResponses = product.getImages().stream()
-                .map(image -> new ProductImageResponse(image.getId(), image.getUrl()))
-                .toList();
 
         return new ProductResponse(
                 product.getId(),
@@ -30,7 +27,7 @@ public class ProductResponseMapper {
                 product.getProductDescription(),
                 product.getPrice(),
                 categoryResponseMapper.mapToCategoryResponseListWithIdAndName(product.getCategories()),
-                imageResponses
+                productImageResponseMapper.mapToListOfProductImageResponse(product)
                 );
     }
 

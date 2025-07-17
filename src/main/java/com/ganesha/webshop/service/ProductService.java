@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -52,6 +51,7 @@ public class ProductService {
         return productResponseMapper.mapToProductResponse(product);
     }
 
+    @Transactional
     public ProductIdResponse create(NewProductRequest newProductRequest) {
         Category category = categoryRepository.findById(newProductRequest.categoryId()).orElseThrow(() -> new CategoryNotFoundException(newProductRequest.categoryId()));
         Product product = newProductMapper.mapToEntity(newProductRequest, category);
@@ -95,20 +95,20 @@ public class ProductService {
     }
 
     public List<ProductImage> extractValidNewImages(UpdateProductRequest updateProductRequest, List<String> existingFileNames, Product productToUpdate) {
-        List<ProductImage> newImages = updateProductRequest.imageFileNames().stream()
-                .filter(existingFileName -> !existingFileNames.contains(existingFileName))
-                .map(fileName  -> {
-                    Optional<File> fileOptional = imageService.serveFile(fileName);
-                    if (fileOptional.isEmpty()) {
-                        // megtortenhet hogy nem mentette el? Frontend ellenorzi ezt majd? de backenden mindenkepp kell ellenoriznie? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
-                        throw new ImageFileNotFoundException(fileName);
-                    }
-                    ProductImage newImage = new ProductImage();
-                    newImage.setUrl(fileName);
-                    newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
-                    return newImage;
-                })
-                .collect(Collectors.toList());
-           return newImages;
+
+           return updateProductRequest.imageFileNames().stream()
+                   .filter(existingFileName -> !existingFileNames.contains(existingFileName))
+                   .map(fileName  -> {
+                       Optional<File> fileOptional = imageService.serveFile(fileName);
+                       if (fileOptional.isEmpty()) {
+                           // megtortenhet hogy nem mentette el? Frontend ellenorzi ezt majd? de backenden mindenkepp kell ellenoriznie? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
+                           throw new ImageFileNotFoundException(fileName);
+                       }
+                       ProductImage newImage = new ProductImage();
+                       newImage.setUrl(fileName);
+                       newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
+                       return newImage;
+                   })
+                   .collect(Collectors.toList());
     }
 }
