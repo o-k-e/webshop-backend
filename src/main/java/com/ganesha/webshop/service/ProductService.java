@@ -96,14 +96,14 @@ public class ProductService {
         return productResponseMapper.mapToProductResponse(productToUpdate);
     }
 
-    public List<Category> findCategories(UpdateProductRequest updateProductRequest) {
+    private List<Category> findCategories(UpdateProductRequest updateProductRequest) {
 
         return updateProductRequest.categoryIds().stream()
                 .map(id -> categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id)))
                 .collect(Collectors.toList());
     }
 
-    public List<String> getExistingFileNames(Product productToUpdate) {
+    private List<String> getExistingFileNames(Product productToUpdate) {
         List<ProductImage> existingImages = productToUpdate.getImages();
 
         return existingImages.stream()
@@ -111,14 +111,13 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductImage> extractValidNewImages(UpdateProductRequest updateProductRequest, List<String> existingFileNames, Product productToUpdate) {
+    private List<ProductImage> extractValidNewImages(UpdateProductRequest updateProductRequest, List<String> existingFileNames, Product productToUpdate) {
 
            return updateProductRequest.imageFileNames().stream()
                    .filter(existingFileName -> !existingFileNames.contains(existingFileName))
                    .map(fileName  -> {
                        Optional<File> fileOptional = imageService.getImageFileIfExists(fileName);
                        if (fileOptional.isEmpty()) {
-                           // megtortenhet hogy nem mentette el? Frontend ellenorzi ezt majd? de backenden mindenkepp kell ellenoriznie? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
                            throw new ImageFileNotFoundException(fileName);
                        }
                        ProductImage newImage = new ProductImage();
