@@ -10,12 +10,12 @@ import java.util.List;
 @Component
 public class ProductResponseMapper {
 
-    private final CategoryResponseMapper categoryResponseMapper;
+    private final CategoryWithIdAndNameResponseMapper categoryWithIdAndNameResponseMapper;
     private final ProductImageResponseMapper productImageResponseMapper;
 
     @Autowired
-    public ProductResponseMapper(CategoryResponseMapper categoryResponseMapper, ProductImageResponseMapper productImageResponseMapper) {
-        this.categoryResponseMapper = categoryResponseMapper;
+    public ProductResponseMapper(CategoryWithIdAndNameResponseMapper categoryWithIdAndNameResponseMapper, ProductImageResponseMapper productImageResponseMapper) {
+        this.categoryWithIdAndNameResponseMapper = categoryWithIdAndNameResponseMapper;
         this.productImageResponseMapper = productImageResponseMapper;
     }
 
@@ -26,7 +26,7 @@ public class ProductResponseMapper {
                 product.getProductName(),
                 product.getProductDescription(),
                 product.getPrice(),
-                categoryResponseMapper.mapToCategoryResponseListWithIdAndName(product.getCategories()),
+                categoryWithIdAndNameResponseMapper.mapToCategoryResponseListWithIdAndName(product.getCategories()),
                 productImageResponseMapper.mapToListOfProductImageResponse(product)
                 );
     }
