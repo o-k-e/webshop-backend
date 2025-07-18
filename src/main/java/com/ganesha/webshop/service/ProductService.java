@@ -4,6 +4,7 @@ import com.ganesha.webshop.model.dto.request.NewProductRequest;
 import com.ganesha.webshop.model.dto.request.UpdateProductRequest;
 import com.ganesha.webshop.model.dto.response.ProductIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
+import com.ganesha.webshop.model.dto.response.SuccessResponse;
 import com.ganesha.webshop.model.entity.product.Category;
 import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.entity.product.ProductImage;
@@ -13,6 +14,7 @@ import com.ganesha.webshop.model.exception.ProductNotFoundException;
 import com.ganesha.webshop.repository.CategoryRepository;
 import com.ganesha.webshop.repository.ProductRepository;
 import com.ganesha.webshop.service.mapper.NewProductMapper;
+import com.ganesha.webshop.service.mapper.ProductImageResponseMapper;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,14 +33,18 @@ public class ProductService {
     private final ProductResponseMapper productResponseMapper;
     private final NewProductMapper newProductMapper;
     private final ImageService imageService;
+    private final FileDeletionService fileDeletionService;
+    private final ProductImageResponseMapper productImageResponseMapper;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductResponseMapper productResponseMapper, CategoryRepository categoryRepository, NewProductMapper newProductMapper, ImageService imageService) {
+    public ProductService(ProductRepository productRepository, ProductResponseMapper productResponseMapper, CategoryRepository categoryRepository, NewProductMapper newProductMapper, ImageService imageService, FileDeletionService fileDeletionService, ProductImageResponseMapper productImageResponseMapper) {
         this.productRepository = productRepository;
         this.productResponseMapper = productResponseMapper;
         this.categoryRepository = categoryRepository;
         this.newProductMapper = newProductMapper;
         this.imageService = imageService;
+        this.fileDeletionService = fileDeletionService;
+        this.productImageResponseMapper = productImageResponseMapper;
     }
 
     public List<ProductResponse> findAll() {
@@ -57,6 +63,17 @@ public class ProductService {
         Product product = newProductMapper.mapToEntity(newProductRequest, category);
         productRepository.save(product);
         return new ProductIdResponse(product.getId());
+    }
+
+    @Transactional
+    public SuccessResponse delete(long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        List<String> fileNames = product.getImages().stream()
+                .map(ProductImage::getUrl)
+                .toList();
+        fileDeletionService.deleteFile(fileNames);
+        productRepository.delete(product);
+        return new SuccessResponse(true);
     }
 
     @Transactional
@@ -99,7 +116,7 @@ public class ProductService {
            return updateProductRequest.imageFileNames().stream()
                    .filter(existingFileName -> !existingFileNames.contains(existingFileName))
                    .map(fileName  -> {
-                       Optional<File> fileOptional = imageService.serveFile(fileName);
+                       Optional<File> fileOptional = imageService.getImageFileIfExists(fileName);
                        if (fileOptional.isEmpty()) {
                            // megtortenhet hogy nem mentette el? Frontend ellenorzi ezt majd? de backenden mindenkepp kell ellenoriznie? ha igen, akkor az egesz folyamatot ujra kellene inditani a frontendrol? Transactional?
                            throw new ImageFileNotFoundException(fileName);
@@ -111,4 +128,6 @@ public class ProductService {
                    })
                    .collect(Collectors.toList());
     }
+
+
 }
