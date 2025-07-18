@@ -10,12 +10,34 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.UUID;
 
+/**
+ * Service class responsible for handling image file uploads to a local directory.
+ * <p>
+ * It supports Base64 image decoding and ensures that the target upload folder exists.
+ * The image filenames are stored with a unique UUID prefix to avoid collisions.
+ */
 @Service
 public class FileUploaderService {
 
+    /**
+     * The directory where image files will be saved.
+     * <p>
+     * This path is injected from the application properties using the key:
+     * <code>fileuploader.directory</code>.
+     * Example:
+     * <pre>
+     * fileuploader.directory=uploads/images
+     * </pre>
+     */
     @Value("${fileuploader.directory}")
     private String uploadDir;
 
+    /**
+     * Initializes the upload directory if it doesn't exist.
+     * <p>
+     * This method is called automatically after the Spring bean is constructed.
+     * It creates the directory structure defined by {@code uploadDir} if it is missing.
+     */
     @PostConstruct //miutan letrejon a Bean, ezt lefuttatja
     public void uploadDirInitializer() { // megnezi hogy letezik e a folder, ha nem, letrehozza
         File directory = new File(uploadDir);
@@ -24,6 +46,22 @@ public class FileUploaderService {
         }
     }
 
+    /**
+     * Saves a Base64-encoded image file to the upload directory.
+     * <p>
+     * The image will be saved using a generated unique filename that includes a UUID to avoid filename collisions.
+     * The expected Base64 format from the frontend looks like:
+     * <pre>
+     {
+     *   "filename": "xy.jpg",
+     *   "base64": "data:image/png;base64,iVBORw0KGgoAAAANS..."
+     * }
+     * </pre>
+     *
+     * @param filename     the original filename sent from the frontend (used as suffix)
+     * @param base64Image  the Base64-encoded image string
+     * @return the saved filename (including the UUID prefix), or an empty string if the upload failed
+     */
     public String upload(String filename, String base64Image) { // frontendrol file kivalsztos imputbol csinal majd egy base64 stringet, belefuzi egy json-ba es elkuldi a controllernek
         try {                                               //base64Image: src="data:image/png;base64, iVBORw0kgoAAADgdy34akdoKLoepaoe...ez meg hosszan...="
             String[] parts = base64Image.split(",");

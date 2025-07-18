@@ -26,7 +26,7 @@ public class ImageController {
 
     @GetMapping("/images/{fileName}")
     public ResponseEntity<FileSystemResource> serveFile(@PathVariable String fileName) { // FileSystemResource-olyan objektum, amikor statikus file-t szeretnenk visszakuldeni
-        Optional<File> file = imageService.serveFile(fileName); // visszaadja a keresett file-t (Optional.of(file) vagy Optional.empty)
+        Optional<File> file = imageService.getImageFileIfExists(fileName); // visszaadja a keresett file-t (Optional.of(file) vagy Optional.empty)
 
         if (file.isPresent()) {
             HttpHeaders headers = new HttpHeaders(); //HTTPHeaders-et lehet beallitani
@@ -58,9 +58,3 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.CREATED).body(imageFilenameResponse);
     }
 }
-
-
-//    {
-//      filename: "xy.jpg",
-//      base64: "kasjdksjklajdskfjdasljkslajfdlajlkdsjal"
-//        }
