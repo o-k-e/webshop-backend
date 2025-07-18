@@ -3,12 +3,13 @@ package com.ganesha.webshop.service;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Service class responsible for handling image file uploads to a local directory.
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Service
 public class FileUploaderService {
 
+    private static final Logger logger = LoggerFactory.getLogger(FileUploaderService.class);
     /**
      * The directory where image files will be saved.
      * <p>
@@ -74,6 +76,7 @@ public class FileUploaderService {
                 fos.write(imageBytes);  // file-ba binaris adatokat tud irni
             }
 
+            logger.info("{} has been uploaded", fileName);
             return fileName;
         } catch (IOException e) {
             return "";
