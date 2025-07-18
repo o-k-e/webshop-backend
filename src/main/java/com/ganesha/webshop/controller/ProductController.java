@@ -4,6 +4,7 @@ import com.ganesha.webshop.model.dto.request.NewProductRequest;
 import com.ganesha.webshop.model.dto.request.UpdateProductRequest;
 import com.ganesha.webshop.model.dto.response.ProductIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
+import com.ganesha.webshop.model.dto.response.SuccessResponse;
 import com.ganesha.webshop.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class ProductController {
     @PutMapping("/{id}")
     public ProductResponse updateProduct(@PathVariable long id, @RequestBody @Valid UpdateProductRequest updateProductRequest) {
         return productService.update(id, updateProductRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public SuccessResponse deleteProduct(@PathVariable long id) {
+        return productService.delete(id);
     }
 
 }
