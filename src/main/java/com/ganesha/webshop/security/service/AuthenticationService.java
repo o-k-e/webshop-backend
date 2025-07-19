@@ -29,10 +29,11 @@ public class AuthenticationService {
     }
 
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
-        logger.info("Authenticating user " + loginRequest.username() + " with password " + loginRequest.password());
+        logger.info("Authenticating user {}", loginRequest.username());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
+        logger.info("Successfully authenticated user {}", loginRequest.username());
         Member member = memberRepository.findByUsername(loginRequest.username()).orElseThrow();
         return new JwtResponse(jwt, member.getUsername(), member.getRole().getName());
     }
