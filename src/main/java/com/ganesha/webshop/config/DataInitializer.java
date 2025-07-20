@@ -3,9 +3,14 @@ package com.ganesha.webshop.config;
 import com.ganesha.webshop.model.entity.product.Category;
 import com.ganesha.webshop.model.entity.product.Product;
 import com.ganesha.webshop.model.entity.product.ProductImage;
+import com.ganesha.webshop.model.entity.user.Member;
+import com.ganesha.webshop.model.entity.user.Role;
 import com.ganesha.webshop.repository.CategoryRepository;
+import com.ganesha.webshop.repository.MemberRepository;
 import com.ganesha.webshop.repository.ProductRepository;
+import com.ganesha.webshop.repository.RoleRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,9 +22,17 @@ public class DataInitializer {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    public DataInitializer(ProductRepository productRepository, CategoryRepository categoryRepository) {
+    private final RoleRepository roleRepository;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+
+
+    public DataInitializer(ProductRepository productRepository, CategoryRepository categoryRepository, RoleRepository roleRepository, MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+        this.roleRepository = roleRepository;
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -27,7 +40,12 @@ public class DataInitializer {
         productRepository.deleteAll();
         categoryRepository.deleteAll();
 
-// illatok
+        createProductsWithRelatedEntities();
+        createMembersWithRoles();
+    }
+
+    private void createProductsWithRelatedEntities() {
+        // illatok
         Category scents = new Category();
         scents.setCategoryName("Illatok");
         categoryRepository.save(scents);
@@ -236,9 +254,41 @@ public class DataInitializer {
 
         productRepository.save(bracelet);
 
-
     }
 
+    private void createMembersWithRoles() {
+        if (roleRepository.findByName("USER").isEmpty()) {
+            Role role = new Role();
+            role.setName("USER");
+            roleRepository.save(role);
 
+            Member member = new Member();
+            member.setUsername("user");
+            member.setPassword(passwordEncoder.encode("User123"));
+            member.setFirstName("User1");
+            member.setLastName("User1");
+            member.setEmail("user@gmail.com");
+            member.setPhoneNumber("06301234567");
+            member.setRole(role);
+            memberRepository.save(member);
+        }
+
+        if (roleRepository.findByName("ADMIN").isEmpty()) {
+            Role role = new Role();
+            role.setName("ADMIN");
+            roleRepository.save(role);
+
+            Member member = new Member();
+            member.setUsername("admin");
+            member.setPassword(passwordEncoder.encode("Admin123"));
+            member.setFirstName("Admin1");
+            member.setLastName("Admin1");
+            member.setEmail("admin@gmail.com");
+            member.setPhoneNumber("06201234567");
+
+            member.setRole(role);
+            memberRepository.save(member);
+        }
+    }
 
 }
