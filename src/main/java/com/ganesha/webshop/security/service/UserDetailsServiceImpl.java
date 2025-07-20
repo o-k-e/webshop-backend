@@ -2,7 +2,6 @@ package com.ganesha.webshop.security.service;
 
 import com.ganesha.webshop.model.entity.user.Member;
 import com.ganesha.webshop.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,11 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PostgreUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
-    public PostgreUserDetailsService(MemberRepository memberRepository) {
+    public UserDetailsServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
