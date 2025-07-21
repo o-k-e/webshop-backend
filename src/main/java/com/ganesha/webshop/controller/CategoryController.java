@@ -1,16 +1,18 @@
 package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.response.CategoryResponse;
+import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,8 +22,8 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-//    @GetMapping()
-//    List<CategoryResponse> getCategories() {
-//        return
+//    @GetMapping("/{id}/products")
+//    List<ProductResponse> getProductsByCategory(@PathVariable Long id) {
+//        return categoryService.getProductsByCategoryId(id);
 //    }
 }
