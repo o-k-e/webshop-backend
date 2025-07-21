@@ -4,6 +4,8 @@ import com.ganesha.webshop.model.dto.request.RegisterRequest;
 import com.ganesha.webshop.model.dto.response.RegisterResponse;
 import com.ganesha.webshop.model.entity.user.Member;
 import com.ganesha.webshop.model.entity.user.Role;
+import com.ganesha.webshop.model.exception.HandleEmailExistException;
+import com.ganesha.webshop.model.exception.HandleUserNameExistException;
 import com.ganesha.webshop.repository.MemberRepository;
 import com.ganesha.webshop.repository.RoleRepository;
 import com.ganesha.webshop.service.mapper.NewMemberMapper;
@@ -31,11 +33,11 @@ public class RegisterService {
 
     public RegisterResponse addMember(RegisterRequest registerRequest) {
         if (memberRepository.findByUsername(registerRequest.username()).isPresent()) {
-            throw new IllegalArgumentException("Username is already in use");
+            throw new HandleUserNameExistException();
         }
 
         if (memberRepository.findByEmail(registerRequest.email()).isPresent()) {
-            throw new IllegalArgumentException("Email is already in use");
+            throw new HandleEmailExistException();
         }
 
         try {
