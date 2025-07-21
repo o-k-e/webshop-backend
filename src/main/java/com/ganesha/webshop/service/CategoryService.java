@@ -35,10 +35,10 @@ public class CategoryService {
         return productResponseMapper.mapToProductResponseList(products);
     }
 
-//    public List<CategoryResponse> findAll() {
-//        List<Category> categories = categoryRepository.findAll();
-//        return
-//    }
+    public List<CategoryWithIdAndNameResponse> findAll() {
+        List<Category> categories = categoryRepository.findAll();
+        return categoryWithIdAndNameResponseMapper.mapToCategoryResponseListWithIdAndName(categories);
+    }
 
 //    public List<CategoryWithIdAndNameResponse> findAll() {
 //        List<Category> categories = categoryRepository.findAll();

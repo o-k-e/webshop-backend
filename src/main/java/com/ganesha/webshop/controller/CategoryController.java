@@ -1,6 +1,7 @@
 package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.response.CategoryResponse;
+import com.ganesha.webshop.model.dto.response.CategoryWithIdAndNameResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class CategoryController {
     @GetMapping("/{id}/products")
     List<ProductResponse> getProductsByCategory(@PathVariable Long id) {
         return categoryService.getProductsByCategoryId(id);
+    }
+
+    @GetMapping
+    List<CategoryWithIdAndNameResponse> getCategories() {
+        return categoryService.findAll();
     }
 }
