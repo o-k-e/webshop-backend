@@ -28,12 +28,11 @@ public class CategoryService {
         this.categoryWithIdAndNameResponseMapper = categoryWithIdAndNameResponseMapper;
         this.productResponseMapper = productResponseMapper;
     }
-
-    public List<ProductResponse> getProductsByCategoryId(Long categoryId) {
-        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
-        List<Product> products = category.getProducts();
-        return productResponseMapper.mapToProductResponseList(products);
-    }
+//    public List<ProductResponse> getProductsByCategoryId(Long categoryId) {
+//        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
+//        List<Product> products = category.getProducts();
+//        return productResponseMapper.mapToProductResponseList(products);
+//    }
 
 //    public List<CategoryResponse> findAll() {
 //        List<Category> categories = categoryRepository.findAll();
