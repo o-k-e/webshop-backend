@@ -23,8 +23,7 @@ public class Product {
     @Column(nullable = false)
     private String productName;
 
-    @Lob //Large Object - ensures longer text saved in db
-//    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String productDescription;
 
     @Column(nullable = false)
