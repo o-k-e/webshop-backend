@@ -1,14 +1,13 @@
 package com.ganesha.webshop.controller;
 
-import com.ganesha.webshop.model.dto.response.CategoryResponse;
+import com.ganesha.webshop.model.dto.request.NewCategoryRequest;
 import com.ganesha.webshop.model.dto.response.CategoryWithIdAndNameResponse;
+import com.ganesha.webshop.model.dto.response.CategoryIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +30,10 @@ public class CategoryController {
     @GetMapping
     List<CategoryWithIdAndNameResponse> getCategories() {
         return categoryService.findAll();
+    }
+
+    @PostMapping
+    public CategoryIdResponse createCategory(@RequestBody @Valid NewCategoryRequest newCategoryRequest) {
+        return categoryService.create(newCategoryRequest);
     }
 }

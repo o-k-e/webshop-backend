@@ -45,4 +45,11 @@ public class ProductControllerAdvice {
     public ErrorResponse handleEmailExistHandler(HandleEmailExistException ex) {
         return new ErrorResponse(ex.getMessage());
     }
+
+    @ResponseBody
+    @ExceptionHandler(HandleCategoryExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleCategoryExistHandler(HandleCategoryExistException ex) {
+        return new ErrorResponse(ex.getMessage());
+    }
 }
