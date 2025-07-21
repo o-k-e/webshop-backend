@@ -1,6 +1,7 @@
 package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.request.NewCategoryRequest;
+import com.ganesha.webshop.model.dto.request.UpdateCategoryRequest;
 import com.ganesha.webshop.model.dto.response.CategoryWithIdAndNameResponse;
 import com.ganesha.webshop.model.dto.response.CategoryIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
@@ -35,5 +36,10 @@ public class CategoryController {
     @PostMapping
     public CategoryIdResponse createCategory(@RequestBody @Valid NewCategoryRequest newCategoryRequest) {
         return categoryService.create(newCategoryRequest);
+    }
+
+    @PutMapping("/{id}")
+    public CategoryWithIdAndNameResponse updateCategory(@PathVariable Long id, @RequestBody @Valid UpdateCategoryRequest updateCategoryRequest) {
+        return categoryService.update(id, updateCategoryRequest);
     }
 }

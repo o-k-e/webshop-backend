@@ -1,6 +1,7 @@
 package com.ganesha.webshop.service;
 
 import com.ganesha.webshop.model.dto.request.NewCategoryRequest;
+import com.ganesha.webshop.model.dto.request.UpdateCategoryRequest;
 import com.ganesha.webshop.model.dto.response.CategoryIdResponse;
 import com.ganesha.webshop.model.dto.response.CategoryResponse;
 import com.ganesha.webshop.model.dto.response.CategoryWithIdAndNameResponse;
@@ -54,6 +55,18 @@ public class CategoryService {
         Category newCategory = categoryIdResponseMapper.mapToEntity(newCategoryRequest);
         categoryRepository.save(newCategory);
         return new CategoryIdResponse(newCategory.getId());
+    }
+
+    public CategoryWithIdAndNameResponse update(Long id, UpdateCategoryRequest updateCategoryRequest) {
+        Category categoryToUpdate = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+        categoryRepository.findByCategoryName(updateCategoryRequest.name())
+                .filter(existingCategory -> !existingCategory.getId().equals(id))
+                .ifPresent(existing -> {
+                    throw new HandleCategoryExistException(updateCategoryRequest.name());
+                });
+        categoryToUpdate.setCategoryName(updateCategoryRequest.name());
+        categoryRepository.save(categoryToUpdate);
+        return new CategoryWithIdAndNameResponse(categoryToUpdate.getId(), categoryToUpdate.getCategoryName());
     }
 
 //    public CategoryWithIdAndNameResponse findById(Long id) {
