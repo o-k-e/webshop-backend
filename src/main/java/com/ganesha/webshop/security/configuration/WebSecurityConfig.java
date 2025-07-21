@@ -57,6 +57,9 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/products/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/images/upload-image").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/categories/{id}/products").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/categories").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/categories/*").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.GET, "/api/categories").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().permitAll());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
