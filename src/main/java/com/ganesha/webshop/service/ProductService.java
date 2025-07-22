@@ -2,6 +2,7 @@ package com.ganesha.webshop.service;
 
 import com.ganesha.webshop.model.dto.request.NewProductRequest;
 import com.ganesha.webshop.model.dto.request.UpdateProductRequest;
+import com.ganesha.webshop.model.dto.response.PaginatedResponse;
 import com.ganesha.webshop.model.dto.response.ProductIdResponse;
 import com.ganesha.webshop.model.dto.response.ProductResponse;
 import com.ganesha.webshop.model.dto.response.SuccessResponse;
@@ -17,6 +18,8 @@ import com.ganesha.webshop.service.mapper.NewProductMapper;
 import com.ganesha.webshop.service.mapper.ProductImageResponseMapper;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,6 +97,23 @@ public class ProductService {
         productRepository.save(productToUpdate);
 
         return productResponseMapper.mapToProductResponse(productToUpdate);
+    }
+
+    public PaginatedResponse<ProductResponse> getPaginatedProducts(Pageable pageable) {
+        Page<Product> productPage = productRepository.findAll(pageable);
+
+        List<ProductResponse> content = productPage.getContent().stream()
+                .map(productResponseMapper::mapToProductResponse)
+                .toList();
+
+        return new PaginatedResponse<>(
+                content,
+                productPage.getNumber(),
+                productPage.getSize(),
+                productPage.getTotalElements(),
+                productPage.getTotalPages(),
+                productPage.isLast()
+        );
     }
 
     private List<Category> findCategories(UpdateProductRequest updateProductRequest) {

@@ -52,11 +52,12 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/products", "/api/products/*").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/products/paginated").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/categories/{id}/products").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/products/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/products/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/images/upload-image").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/categories/{id}/products").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/categories").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/categories/*").hasRole("ADMIN")
 //                        .requestMatchers(HttpMethod.GET, "/api/categories").permitAll()
