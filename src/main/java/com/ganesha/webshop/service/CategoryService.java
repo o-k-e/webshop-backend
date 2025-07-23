@@ -60,7 +60,6 @@ public class CategoryService {
     public CategoryWithIdAndNameResponse update(Long id, UpdateCategoryRequest updateCategoryRequest) {
         Category categoryToUpdate = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
         categoryRepository.findByCategoryName(updateCategoryRequest.name())
-                .filter(existingCategory -> !existingCategory.getId().equals(id))
                 .ifPresent(existing -> {
                     throw new HandleCategoryExistException(updateCategoryRequest.name());
                 });
