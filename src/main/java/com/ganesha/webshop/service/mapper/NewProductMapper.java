@@ -8,22 +8,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class NewProductMapper {
 
-    public Product mapToEntity(NewProductRequest newProductRequest, Category category) {
+    public Product mapToProduct(NewProductRequest newProductRequest, List<Category> categories) {
         Product product = new Product();
         product.setProductName(newProductRequest.productName());
         product.setProductDescription(newProductRequest.description());
         product.setPrice(newProductRequest.price());
-        product.setCategories(new ArrayList<>(List.of(category)));
+        product.setCategories(new ArrayList<>(categories));
 
-        ProductImage image = new ProductImage();
-        image.setUrl(newProductRequest.imageFileName());
-        image.setProduct(product);
-        product.setImages(new ArrayList<>(List.of(image)));
+        List<ProductImage> images = newProductRequest.imageFileNames().stream().map(fileName -> {
+            ProductImage image = new ProductImage();
+            image.setUrl(fileName);
+            image.setProduct(product);
+            return image;
+        }).collect(Collectors.toList());
 
+        product.setImages(new ArrayList<>(images));
         return product;
     }
 }

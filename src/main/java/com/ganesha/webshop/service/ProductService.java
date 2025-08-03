@@ -62,8 +62,8 @@ public class ProductService {
 
     @Transactional
     public ProductIdResponse create(NewProductRequest newProductRequest) {
-        Category category = categoryRepository.findById(newProductRequest.categoryId()).orElseThrow(() -> new CategoryNotFoundException(newProductRequest.categoryId()));
-        Product product = newProductMapper.mapToEntity(newProductRequest, category);
+        List<Category> categories = newProductRequest.categoryIds().stream().map(id -> categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id))).collect(Collectors.toList());
+        Product product = newProductMapper.mapToProduct(newProductRequest, categories);
         productRepository.save(product);
         return new ProductIdResponse(product.getId());
     }
