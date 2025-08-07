@@ -50,18 +50,6 @@ This is a real-world webshop project, developed using a modern full-stack archit
 - Form validation with react-hook-form + Zod
 - Auto token handling (AuthContext + interceptor)
 
-## 🧑‍💻 Technologies
-
-| Area        | Tech Stack                       |
-|-------------|----------------------------------|
-| Frontend    | React, TypeScript, Tailwind CSS  |
-| Backend     | Spring Boot (Java)               |
-| Database    | PostgreSQL                       |
-| Auth        | JWT                              |
-| Styling     | Tailwind CSS                     |
-| Validation  | Zod + react-hook-form            |
-| Deployment  | Docker + CI/CD (planned)         |
-
 ## 📂 Folder Structure (Frontend)
 
 ```
