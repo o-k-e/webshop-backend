@@ -1,6 +1,6 @@
-# Ganesha Webshop
+# 🛍️ Ganesha Webshop
 
-A webshop project built with modern web technologies, developed for a real client with the goal of production deployment. The aim is to create a secure, responsive, and containerized webshop that is easy to scale and maintain.
+A full-stack webshop project built with modern technologies, developed for a real client and intended for live production use. The focus is on creating a secure, responsive, and containerized application that is easy to scale, extend, and maintain.
 
 ## 🛠️ Built With
 
