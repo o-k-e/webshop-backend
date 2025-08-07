@@ -4,13 +4,37 @@ This is a real-world webshop project, developed using a modern full-stack archit
 
 ## 🛠️ Built With
 
-- **Frontend:** React + TypeScript + Tailwind CSS
-- **Backend:** Java + Spring Boot
-- **Database:** PostgreSQL
-- **Authentication:** JWT (JSON Web Token)
-- **Image Handling:** Local storage (Cloudinary planned for production)
-- **Containerization:** Docker (optional)
-- **Version Control:** Git (GitHub)
+- **Backend:**  
+  [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/projects/spring-boot)
+
+- **Frontend:**  
+  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)  
+  [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)  
+  [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+
+- **Database:**  
+  [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+
+- **Containerization:**  
+  [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)  
+  [![NGINX](https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com/)
+
+- **Authentication:** Local storage (planned to add OAUTH2)  
+  ![JWT](https://img.shields.io/badge/Auth-JWT-orange?style=for-the-badge&logo=jsonwebtokens)
+
+- **Image Handling:** Local storage (Cloudinary planned for production)  
+  ![Local Storage](https://img.shields.io/badge/Image%20Handling-Local%20Storage-blue?style=for-the-badge)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-Planned-lightgrey?style=for-the-badge&logo=cloudinary)
+
+- **Version Control:**  
+  ![Git](https://img.shields.io/badge/Version%20Control-Git-orange?style=for-the-badge&logo=git)
+![GitHub](https://img.shields.io/badge/Repo-GitHub-black?style=for-the-badge&logo=github)
+
+## Contact
+
+- **Erika Oláhné Klár:**  
+  [![GitHub](https://img.shields.io/badge/GitHub-%2312100E.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/o-k-e)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/erika-olahne-klar/)
+
 
 ## ✨ Features
 
