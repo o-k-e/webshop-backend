@@ -1,8 +1,11 @@
 package com.ganesha.webshop.model.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+
+import java.util.List;
 
 public record NewProductRequest(
 
@@ -15,9 +18,9 @@ public record NewProductRequest(
         @Positive(message = "Price must be a positive number.")
         double price,
 
-        @NotNull(message = "Category is required.")
-        Long categoryId,
+        @NotEmpty(message = "At least one category must be selected.")
+        List<@NotNull Long> categoryIds,
 
-        @NotBlank(message = "At least one image must be provided.")
-        String imageFileName) {
+        @NotEmpty(message = "At least one image must be provided.")
+        List<@NotBlank String> imageFileNames) {
 }
