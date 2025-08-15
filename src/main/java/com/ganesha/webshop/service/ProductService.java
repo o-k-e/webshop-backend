@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.text.Normalizer;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -87,7 +88,7 @@ public class ProductService {
         productToUpdate.setProductDescription(updateProductRequest.productDescription());
         productToUpdate.setPrice(updateProductRequest.price());
 
-        List<Category> categories = findCategories(updateProductRequest);
+        List<Category> categories = findCategoriesOfProduct(updateProductRequest);
         productToUpdate.setCategories(categories);
 
         List<String> existingFileNames = getExistingFileNames(productToUpdate);
@@ -100,7 +101,13 @@ public class ProductService {
     }
 
     public List<ProductResponse> search(String query) {
-        return productRepository.findByProductNameContainingIgnoreCase(query).stream()
+        String normalizedQuery = normalize(query);
+
+        return productRepository.findAll().stream()
+                .filter(product -> {
+                    String normalizedProductName = normalize(product.getProductName());
+                    return normalizedProductName.contains(normalizedQuery);
+                })
                 .map(productResponseMapper::mapToProductResponse)
                 .toList();
     }
@@ -122,7 +129,7 @@ public class ProductService {
         );
     }
 
-    private List<Category> findCategories(UpdateProductRequest updateProductRequest) {
+    private List<Category> findCategoriesOfProduct(UpdateProductRequest updateProductRequest) {
 
         return updateProductRequest.categoryIds().stream()
                 .map(id -> categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id)))
@@ -152,6 +159,12 @@ public class ProductService {
                        return newImage;
                    })
                    .collect(Collectors.toList());
+    }
+
+    private String normalize(String input) {
+        return Normalizer.normalize(input, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .toLowerCase();
     }
 
 
