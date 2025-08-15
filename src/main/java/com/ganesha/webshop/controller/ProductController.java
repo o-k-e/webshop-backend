@@ -52,6 +52,11 @@ public class ProductController {
         return productService.delete(id);
     }
 
+    @GetMapping("/search")
+    public List<ProductResponse> searchProducts(@RequestParam(required = false) String query) {
+        return productService.search(query);
+    }
+
     @GetMapping("/paginated")
     public PaginatedResponse<ProductResponse> getPaginatedProducts(
             @RequestParam(defaultValue = "0") int page,
