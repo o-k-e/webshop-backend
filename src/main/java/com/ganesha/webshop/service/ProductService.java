@@ -99,6 +99,12 @@ public class ProductService {
         return productResponseMapper.mapToProductResponse(productToUpdate);
     }
 
+    public List<ProductResponse> search(String query) {
+        return productRepository.findByProductNameContainingIgnoreCase(query).stream()
+                .map(productResponseMapper::mapToProductResponse)
+                .toList();
+    }
+
     public PaginatedResponse<ProductResponse> getPaginatedProducts(Pageable pageable) {
         Page<Product> productPage = productRepository.findAll(pageable);
 
