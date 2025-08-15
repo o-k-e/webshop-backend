@@ -264,7 +264,7 @@ public class DataInitializer {
 
             Member member = new Member();
             member.setUsername("user");
-            member.setPassword(passwordEncoder.encode("User123"));
+            member.setPassword(passwordEncoder.encode("User1@34"));
             member.setFirstName("User1");
             member.setLastName("User1");
             member.setEmail("user@gmail.com");
@@ -280,7 +280,7 @@ public class DataInitializer {
 
             Member member = new Member();
             member.setUsername("admin");
-            member.setPassword(passwordEncoder.encode("Admin123"));
+            member.setPassword(passwordEncoder.encode("Admin1@34"));
             member.setFirstName("Admin1");
             member.setLastName("Admin1");
             member.setEmail("admin@gmail.com");
