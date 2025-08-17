@@ -101,13 +101,12 @@ public class ProductService {
     }
 
     public List<ProductResponse> search(String query) {
-        String normalizedQuery = normalize(query);
-
-        return productRepository.findAll().stream()
-                .filter(product -> {
-                    String normalizedProductName = normalize(product.getProductName());
-                    return normalizedProductName.contains(normalizedQuery);
-                })
+        if (query == null || query.isBlank()) {
+            return productRepository.findAll().stream()
+                    .map(productResponseMapper::mapToProductResponse)
+                    .toList();
+        }
+        return productRepository.findByProductNameContainingIgnoreCase(query).stream()
                 .map(productResponseMapper::mapToProductResponse)
                 .toList();
     }
