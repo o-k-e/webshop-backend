@@ -22,9 +22,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.domain.Specification;
+import jakarta.persistence.criteria.JoinType;
 
 import java.io.File;
-import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +40,6 @@ public class ProductService {
     private final NewProductMapper newProductMapper;
     private final ImageService imageService;
     private final FileDeletionService fileDeletionService;
-    private final ProductImageResponseMapper productImageResponseMapper;
 
     @Autowired
     public ProductService(ProductRepository productRepository, ProductResponseMapper productResponseMapper, CategoryRepository categoryRepository, NewProductMapper newProductMapper, ImageService imageService, FileDeletionService fileDeletionService, ProductImageResponseMapper productImageResponseMapper) {
@@ -48,7 +49,6 @@ public class ProductService {
         this.newProductMapper = newProductMapper;
         this.imageService = imageService;
         this.fileDeletionService = fileDeletionService;
-        this.productImageResponseMapper = productImageResponseMapper;
     }
 
     public List<ProductResponse> findAll() {
@@ -100,34 +100,6 @@ public class ProductService {
         return productResponseMapper.mapToProductResponse(productToUpdate);
     }
 
-    public List<ProductResponse> search(String query) {
-        if (query == null || query.isBlank()) {
-            return productRepository.findAll().stream()
-                    .map(productResponseMapper::mapToProductResponse)
-                    .toList();
-        }
-        return productRepository.findByProductNameContainingIgnoreCase(query).stream()
-                .map(productResponseMapper::mapToProductResponse)
-                .toList();
-    }
-
-    public PaginatedResponse<ProductResponse> getPaginatedProducts(Pageable pageable) {
-        Page<Product> productPage = productRepository.findAll(pageable);
-
-        List<ProductResponse> content = productPage.getContent().stream()
-                .map(productResponseMapper::mapToProductResponse)
-                .toList();
-
-        return new PaginatedResponse<>(
-                content,
-                productPage.getNumber(),
-                productPage.getSize(),
-                productPage.getTotalElements(),
-                productPage.getTotalPages(),
-                productPage.isLast()
-        );
-    }
-
     private List<Category> findCategoriesOfProduct(UpdateProductRequest updateProductRequest) {
 
         return updateProductRequest.categoryIds().stream()
@@ -145,25 +117,74 @@ public class ProductService {
 
     private List<ProductImage> extractValidNewImages(UpdateProductRequest updateProductRequest, List<String> existingFileNames, Product productToUpdate) {
 
-           return updateProductRequest.imageFileNames().stream()
-                   .filter(existingFileName -> !existingFileNames.contains(existingFileName))
-                   .map(fileName  -> {
-                       Optional<File> fileOptional = imageService.getImageFileIfExists(fileName);
-                       if (fileOptional.isEmpty()) {
-                           throw new ImageFileNotFoundException(fileName);
-                       }
-                       ProductImage newImage = new ProductImage();
-                       newImage.setUrl(fileName);
-                       newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
-                       return newImage;
-                   })
-                   .collect(Collectors.toList());
+        return updateProductRequest.imageFileNames().stream()
+                .filter(existingFileName -> !existingFileNames.contains(existingFileName))
+                .map(fileName  -> {
+                    Optional<File> fileOptional = imageService.getImageFileIfExists(fileName);
+                    if (fileOptional.isEmpty()) {
+                        throw new ImageFileNotFoundException(fileName);
+                    }
+                    ProductImage newImage = new ProductImage();
+                    newImage.setUrl(fileName);
+                    newImage.setProduct(productToUpdate); //mashoz tartozo kepet hozza tud adni ujra uj id-val
+                    return newImage;
+                })
+                .collect(Collectors.toList());
     }
 
-    private String normalize(String input) {
-        return Normalizer.normalize(input, Normalizer.Form.NFD)
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .toLowerCase();
+    //Todo: check if it's going to be needed or not
+    public PaginatedResponse<ProductResponse> getPaginatedProducts(Pageable pageable) {
+        Page<Product> productPage = productRepository.findAll(pageable);
+
+        List<ProductResponse> content = productPage.getContent().stream()
+                .map(productResponseMapper::mapToProductResponse)
+                .toList();
+
+        return new PaginatedResponse<>(
+                content,
+                productPage.getNumber(),
+                productPage.getSize(),
+                productPage.getTotalElements(),
+                productPage.getTotalPages(),
+                productPage.isLast()
+        );
+    }
+
+    public PaginatedResponse<ProductResponse> search(String queryText, Long categoryId, Pageable pageable) {
+        Specification<Product> spec = buildSpec(queryText, categoryId);
+        Page<Product> page = productRepository.findAll(spec, pageable);
+
+        List<ProductResponse> content = page.getContent().stream()
+                .map(productResponseMapper::mapToProductResponse)
+                .toList();
+
+        return new PaginatedResponse<>(
+                content,
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.isLast()
+        );
+    }
+
+    private Specification<Product> buildSpec(String queryText, Long categoryId) {
+        return (root, cq, cb) -> {
+            List<jakarta.persistence.criteria.Predicate> preds = new ArrayList<>();
+
+            if (queryText != null && !queryText.isBlank()) {
+                String like = "%" + queryText.toLowerCase() + "%";
+                preds.add(cb.like(cb.lower(root.get("productName")), like));
+            }
+
+            if (categoryId != null) {
+                var cat = root.join("categories", JoinType.INNER);
+                preds.add(cb.equal(cat.get("id"), categoryId));
+                cq.distinct(true); // duplikáció elkerülése JOIN miatt
+            }
+
+            return cb.and(preds.toArray(new jakarta.persistence.criteria.Predicate[0]));
+        };
     }
 
 
