@@ -52,9 +52,20 @@ public class ProductController {
         return productService.delete(id);
     }
 
+    // query   - szöveges keresés (terméknév, case-insensitive, pontosan/ részlegesen illeszt)
+    // categoryId - opcionális kategória szűrő
+    // page/size - lapozás
+    // sort    - pl. "price,asc" | "productName,desc" | "id,asc"
     @GetMapping("/search")
-    public List<ProductResponse> searchProducts(@RequestParam(required = false) String query) {
-        return productService.search(query);
+    public PaginatedResponse<ProductResponse> searchProducts(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "id,asc") String[] sort
+    ) {
+        Pageable pageable = buildPageable(page, size, sort);
+        return productService.search(query, categoryId, pageable);
     }
 
     @GetMapping("/paginated")
@@ -75,5 +86,4 @@ public class ProductController {
         }
         return PageRequest.of(page, size);
     }
-
 }

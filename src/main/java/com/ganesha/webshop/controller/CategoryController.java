@@ -23,6 +23,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    //Todo: ProductService /search endpoints handling it. should be marked as Depricated
     @GetMapping("/{id}/products")
     List<ProductResponse> getProductsByCategory(@PathVariable Long id) {
         return categoryService.getProductsByCategoryId(id);
