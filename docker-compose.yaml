@@ -1,0 +1,38 @@
+services:
+
+  ganesha_db:
+    image: 'postgres:17.4-alpine3.21'
+    container_name: ganesha_db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ganesha_postgres_data:/var/lib/postgresql/data
+    networks:
+      - ganesha_network
+
+  ganesha_backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: ganesha_backend
+    depends_on:
+      - ganesha_db
+    environment:
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - JWT_EXPIRATION_MS=${JWT_EXPIRATION_MS}
+      - STATIC_FILES_PATH=${STATIC_FILES_PATH}
+      - WEBSHOP_JWT_SECRET=${WEBSHOP_JWT_SECRET}
+    networks:
+      - ganesha_network
+
+volumes:
+  ganesha_postgres_data:
+
+networks:
+  ganesha_network:

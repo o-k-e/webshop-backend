@@ -1,19 +1,13 @@
-# 1️⃣ Build stage – Maven image
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
-# A fájlokat bemásoljuk és lebuildeljük
+FROM maven:3.9.9-amazoncorretto-23-debian AS build
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+
+COPY . .
+
 RUN mvn clean package -DskipTests
 
-# 2️⃣ Runtime stage – csak a JAR
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:23-jre-alpine
 
-# JAR fájl bemásolása
-COPY --from=builder /app/target/*.jar app.jar
+WORKDIR /app
+COPY --from=build /app/target/*.jar webshop-backend.jar
 
-# Spring Boot default port
-EXPOSE 8080
-
-# JAR indítása
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "webshop-backend.jar"]
