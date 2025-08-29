@@ -9,5 +9,7 @@ FROM eclipse-temurin:23-jre-alpine
 
 WORKDIR /app
 COPY --from=build /app/target/*.jar webshop-backend.jar
+COPY static/ .
+
 
 ENTRYPOINT ["java", "-jar", "webshop-backend.jar"]
