@@ -53,10 +53,13 @@ public class JwtUtils {
                     .build()
                     .parseSignedClaims(token);    // Csak parse, hibát dob, ha érvénytelen
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            logger.error("JWT validation failed: {}", e.getMessage());
+        } catch (ExpiredJwtException e) {
+            logger.error("JWT token is expired: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("Invalid JWT token: {}", e.getMessage());
+            throw e;
         }
-        return false;
     }
 
     private SecretKey getSigningKey() {
