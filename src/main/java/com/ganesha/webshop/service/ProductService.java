@@ -21,6 +21,7 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -231,6 +232,17 @@ public class ProductService {
                     ? criteriaBuilder.conjunction()
                     : criteriaBuilder.and(predicateArrayList.toArray(new jakarta.persistence.criteria.Predicate[0]));
         };
+    }
+
+    public List<String> getSuggestions(String query) {
+        if (query == null || query.trim().length() < 2) {
+            return List.of();
+        }
+        String queryToLowerCase = query.trim().toLowerCase();
+
+        Pageable topTen = PageRequest.of(0, 10); // első 10 találat
+
+        return productRepository.findTop10ProductNames(queryToLowerCase, topTen);
     }
 
 

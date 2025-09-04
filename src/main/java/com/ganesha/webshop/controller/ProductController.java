@@ -101,4 +101,9 @@ public class ProductController {
         }
         return PageRequest.of(page, size);
     }
+
+    @GetMapping("/suggestions")
+    public List<String> getSuggestions(@RequestParam String query) {
+        return productService.getSuggestions(query);
+    }
 }
