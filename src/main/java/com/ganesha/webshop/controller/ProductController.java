@@ -52,10 +52,25 @@ public class ProductController {
         return productService.delete(id);
     }
 
-    // query   - szöveges keresés (terméknév, case-insensitive, pontosan/ részlegesen illeszt)
-    // categoryId - opcionális kategória szűrő
-    // page/size - lapozás
-    // sort    - pl. "price,asc" | "productName,desc" | "id,asc"
+    /**
+     * Searches for products based on optional filters and pagination parameters.
+     * <p>
+     * Supports the following options:
+     * <ul>
+     *   <li><strong>query</strong> – Text-based search on product name (case-insensitive, partial match supported).</li>
+     *   <li><strong>categoryId</strong> – Optional category filter; only returns products belonging to the specified category.</li>
+     *   <li><strong>page</strong> – Page number to return (zero-based index). Default is 0.</li>
+     *   <li><strong>size</strong> – Number of items per page. Default is 20.</li>
+     *   <li><strong>sort</strong> – Sorting criteria, e.g., {@code "price,asc"}, {@code "productName,desc"}, {@code "id,asc"}.</li>
+     * </ul>
+     *
+     * @param query       optional text query to search in product names
+     * @param categoryId  optional category ID to filter by
+     * @param page        page number to return (starting from 0), default is 0
+     * @param size        number of items per page, default is 20
+     * @param sort        sorting rules (field and direction), default is {"id", "asc"}
+     * @return            a {@link PaginatedResponse} containing a page of {@link ProductResponse} items
+     */
     @GetMapping("/search")
     public PaginatedResponse<ProductResponse> searchProducts(
             @RequestParam(required = false) String query,
@@ -85,5 +100,10 @@ public class ProductController {
             return PageRequest.of(page, size, Sort.by(direction, sortField));
         }
         return PageRequest.of(page, size);
+    }
+
+    @GetMapping("/suggestions")
+    public List<String> getSuggestions(@RequestParam String query) {
+        return productService.getSuggestions(query);
     }
 }

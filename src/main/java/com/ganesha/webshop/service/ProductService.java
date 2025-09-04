@@ -17,8 +17,11 @@ import com.ganesha.webshop.repository.ProductRepository;
 import com.ganesha.webshop.service.mapper.NewProductMapper;
 import com.ganesha.webshop.service.mapper.ProductImageResponseMapper;
 import com.ganesha.webshop.service.mapper.ProductResponseMapper;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,6 +83,16 @@ public class ProductService {
         return new SuccessResponse(true);
     }
 
+    /**
+     * Updates an existing product with new values, categories, and optionally new images.
+     *
+     * @param id the ID of the product to update.
+     * @param updateProductRequest the request object containing updated values.
+     * @return a {@link ProductResponse} representing the updated product.
+     * @throws ProductNotFoundException if the product with the given ID does not exist.
+     * @throws CategoryNotFoundException if any of the provided category IDs are invalid.
+     * @throws ImageFileNotFoundException if any of the new image file names are not found in storage.
+     */
     @Transactional
     public ProductResponse update(long id, UpdateProductRequest updateProductRequest) {
         Product productToUpdate = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
@@ -132,28 +145,41 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    //Todo: check if it's going to be needed or not
+    /**
+     * Retrieves a paginated list of products using the provided {@link Pageable}.
+     *
+     * @param pageable pagination and sorting configuration.
+     * @return a {@link PaginatedResponse} containing product responses.
+     */
     public PaginatedResponse<ProductResponse> getPaginatedProducts(Pageable pageable) {
-        Page<Product> productPage = productRepository.findAll(pageable);
-
-        List<ProductResponse> content = productPage.getContent().stream()
-                .map(productResponseMapper::mapToProductResponse)
-                .toList();
-
-        return new PaginatedResponse<>(
-                content,
-                productPage.getNumber(),
-                productPage.getSize(),
-                productPage.getTotalElements(),
-                productPage.getTotalPages(),
-                productPage.isLast()
-        );
+        Page<Product> page = productRepository.findAll(pageable);
+        return toPaginatedResponse(page);
     }
 
+    /**
+     * Searches for products using optional name query and category filter, with pagination.
+     *
+     * @param queryText the search query text (minimum 3 characters for name filtering).
+     * @param categoryId the optional category ID to filter products by.
+     * @param pageable pagination and sorting configuration.
+     * @return a {@link PaginatedResponse} containing matched products.
+     */
     public PaginatedResponse<ProductResponse> search(String queryText, Long categoryId, Pageable pageable) {
-        Specification<Product> spec = buildSpec(queryText, categoryId);
-        Page<Product> page = productRepository.findAll(spec, pageable);
+        final String query = (queryText == null) ? "" : queryText.trim().toLowerCase();
 
+        Specification<Product> spec = buildSpec(query, categoryId);
+
+        Page<Product> page = productRepository.findAll(spec, pageable);
+        return toPaginatedResponse(page);
+    }
+
+    /**
+     * Converts a {@link Page} of {@link Product} entities to a {@link PaginatedResponse} of DTOs.
+     *
+     * @param page the paginated result from the repository.
+     * @return a {@link PaginatedResponse} containing product DTOs and pagination metadata.
+     */
+    private PaginatedResponse<ProductResponse> toPaginatedResponse(Page<Product> page) {
         List<ProductResponse> content = page.getContent().stream()
                 .map(productResponseMapper::mapToProductResponse)
                 .toList();
@@ -168,23 +194,55 @@ public class ProductService {
         );
     }
 
-    private Specification<Product> buildSpec(String queryText, Long categoryId) {
-        return (root, cq, cb) -> {
-            List<jakarta.persistence.criteria.Predicate> preds = new ArrayList<>();
+    /**
+     * Builds a dynamic JPA {@link Specification} for product search based on the query and category.
+     * - If query is at least 3 characters, filters product name using prefix-matching (start of words).
+     * - If categoryId is provided, filters products by category.
+     *
+     * @param query normalized query string (trimmed, lowercased).
+     * @param categoryId optional category ID to filter by.
+     * @return a composed {@link Specification} to use in search queries.
+     */
+    private Specification<Product> buildSpec(String query, Long categoryId) {
+        return (root, criteriaQuery, criteriaBuilder) -> {
+            List<jakarta.persistence.criteria.Predicate> predicateArrayList = new ArrayList<>();
 
-            if (queryText != null && !queryText.isBlank()) {
-                String like = "%" + queryText.toLowerCase() + "%";
-                preds.add(cb.like(cb.lower(root.get("productName")), like));
+            // NÉV SZŰRÉS: csak ha legalább 3 karakteres a lekérdezés ---
+            if (query != null && !query.isBlank() && query.length() >= 3) {
+                var name = criteriaBuilder.lower(root.get("productName"));
+
+                // "szó eleji" egyezés bárhol a névben:
+                // 1) teljes név eleje: "füs%"
+                var startsAtBeginning = criteriaBuilder.like(name, query + "%");
+                // 2) szóköz utáni szó eleje: "% füs%"
+                var startsAfterSpace = criteriaBuilder.like(name, "% " + query + "%");
+
+                predicateArrayList.add(criteriaBuilder.or(startsAtBeginning, startsAfterSpace));
             }
 
+            // --- KATEGÓRIA SZŰRÉS: mindig alkalmazható (rövid querynél is) ---
             if (categoryId != null) {
                 var cat = root.join("categories", JoinType.INNER);
-                preds.add(cb.equal(cat.get("id"), categoryId));
-                cq.distinct(true); // duplikáció elkerülése JOIN miatt
+                predicateArrayList.add(criteriaBuilder.equal(cat.get("id"), categoryId));
+                criteriaQuery.distinct(true); // JOIN miatti duplikációk elkerülése
             }
 
-            return cb.and(preds.toArray(new jakarta.persistence.criteria.Predicate[0]));
+            // ha nincs predicate, az "mindent enged"
+            return predicateArrayList.isEmpty()
+                    ? criteriaBuilder.conjunction()
+                    : criteriaBuilder.and(predicateArrayList.toArray(new jakarta.persistence.criteria.Predicate[0]));
         };
+    }
+
+    public List<String> getSuggestions(String query) {
+        if (query == null || query.trim().length() < 2) {
+            return List.of();
+        }
+        String queryToLowerCase = query.trim().toLowerCase();
+
+        Pageable topTen = PageRequest.of(0, 10); // első 10 találat
+
+        return productRepository.findTop10ProductNames(queryToLowerCase, topTen);
     }
 
 
