@@ -45,36 +45,36 @@ public class DataInitializer {
     }
 
     private void createProductsWithRelatedEntities() {
-        // illatok
+        // Scents
         Category scents = new Category();
-        scents.setCategoryName("Illatok");
+        scents.setCategoryName("Scents");
         categoryRepository.save(scents);
 
-        // Rozsa fustolo
+        // Rose incense
         Product roseIncense = new Product();
-        roseIncense.setProductName("Rózsa füstölő");
+        roseIncense.setProductName("Rose Incense");
         String description = """
-            <p>A szív nyugalmának és a szeretet illata. A rózsa nemcsak a szerelem szimbóluma, hanem az egyik legmagasabb rezgésű illat a természetben.
-            Lágy, virágos aromája megnyugtatja az elmét, nyitja a szívet, és finoman emeli a hangulatot.
-            Kiváló választás érzelmi tisztuláshoz, bensőséges pillanatokhoz vagy egyszerűen a mindennapi kényeztetéshez.</p>
+            <p>The scent of calmness and love. Rose is not only the symbol of love, but also one of the highest vibrational scents in nature.
+            Its soft, floral aroma soothes the mind, opens the heart, and gently uplifts the mood.
+            A perfect choice for emotional cleansing, intimate moments or simple everyday indulgence.</p>
             <br />
-            <h4>Miért szeretik oly sokan?</h4>
+            <h4>Why do so many people love it?</h4>
             <ul>
-              <li>Édesen virágos, mégsem tolakodó illat</li>
-              <li>Segít oldani a feszültséget, támogatja az önszeretetet</li>
-              <li>Harmonizálja a légkört, meghittebbé teszi az otthonodat</li>
+              <li>Sweetly floral, yet not overpowering</li>
+              <li>Helps relieve tension, supports self-love</li>
+              <li>Harmonizes the atmosphere, makes your home more intimate</li>
             </ul>
             <br />
-            <h4>Natur's Nest – Rózsa füstölő</h4>
-            <p>Lágy illat, mély érzelmek – természetesen.
-            A Natur's Nest Rózsa füstölő a klasszikus rózsa illat természetes, harmonikus változata – nem tolakodó, hanem finoman körbeölel.
-            Tökéletes választás, ha szeretnéd megnyugtatni az elmédet, megnyitni a szívedet vagy egyszerűen csak szebbé tenni a pillanatot.</p>
+            <h4>Nature's Nest – Rose Incense</h4>
+            <p>Soft scent, deep emotions – naturally.
+            Nature's Nest Rose Incense is a natural, harmonious version of the classic rose scent – not overwhelming, but gently enveloping.
+            A perfect choice to calm your mind, open your heart or simply beautify the moment.</p>
             <br />
-            <h4>Illatprofil:</h4>
+            <h4>Scent profile:</h4>
             <ul>
-              <li>Virágos, édes és tiszta rózsaillat</li>
-              <li>Érzelmi kiegyensúlyozásra és hangulatjavításra</li>
-              <li>Természetes alapanyagokból, mesterséges illatanyagok nélkül</li>
+              <li>Floral, sweet and pure rose fragrance</li>
+              <li>For emotional balance and mood enhancement</li>
+              <li>Made from natural ingredients, without artificial fragrances</li>
             </ul>
         """;
         roseIncense.setProductDescription(description);
@@ -93,42 +93,39 @@ public class DataInitializer {
 
         productRepository.save(roseIncense);
 
-
-        // szantalfa fustolo
+        // Sandalwood incense
         Product sandalwood = new Product();
-        sandalwood.setProductName("Szantálfa füstölő");
+        sandalwood.setProductName("Sandalwood Incense");
         String description2 = """
-            <p>A nyugalom és spiritualitás illata. A szantálfa meleg, fás, enyhén édeskés illata évszázadok óta a meditáció és spirituális elmélyülés egyik legkedveltebb kísérője. 
-            Segít elcsendesíteni az elmét, megteremti a belső béke légkörét, és harmonizálja a tér energiáit.</p>
+            <p>The scent of calm and spirituality. The warm, woody, slightly sweet scent of sandalwood has been a favorite companion of meditation and spiritual practice for centuries.
+            It helps to quiet the mind, creates an atmosphere of inner peace, and harmonizes the energy of the space.</p>
             <br />
-            <h4>Mire számíthatsz:</h4>
+            <h4>What to expect:</h4>
             <ul>
-              <li>Mélyen megnyugtató, enyhén balzsamos illat</li>
-              <li>Hosszan tartó, kiegyensúlyozott aroma</li>
-              <li>Ideális meditációhoz, relaxációhoz vagy akár egy csendes estéhez</li>
+              <li>Deeply calming, slightly balsamic scent</li>
+              <li>Long-lasting, balanced aroma</li>
+              <li>Ideal for meditation, relaxation, or a quiet evening</li>
             </ul>
             <br />
-            <h4>Natur's Nest – Chandan füstölő</h4>
-            <p>Spirituális mélység és földelő nyugalom egy illatban.
-            A Chandan, vagyis szantálfa füstölő a Natur's Nest egyik legismertebb és legnemesebb illata. Meleg, balzsamos, 
-            enyhén fűszeres aromája segít elcsendesíteni az elmét, támogatja a mélyebb meditációt és harmonizálja a teret. 
-            Ez az illat nemcsak tisztít, hanem emel is – testileg, lelkileg, szellemileg.</p>
+            <h4>Nature's Nest – Chandan Incense</h4>
+            <p>Spiritual depth and grounding calm in one scent.
+            Chandan, or sandalwood incense, is one of Nature's Nest's most recognized and noble fragrances. Its warm, balsamic, slightly spicy aroma helps to quiet the mind, supports deeper meditation, and harmonizes the space.
+            This scent not only purifies but also elevates – physically, emotionally, spiritually.</p>
             <br />
-            <h4>Illatprofil:</h4>
+            <h4>Scent profile:</h4>
             <ul>
-              <li>Meleg, fás, enyhén édes-balzsamos karakte</li>
-              <li>Kézzel készített természetes alapanyagokból</li>
-              <li>Hosszan tartó, finoman burkoló illatfelhő</li>
+              <li>Warm, woody, slightly sweet-balsamic character</li>
+              <li>Handmade from natural ingredients</li>
+              <li>Long-lasting, gently enveloping scent cloud</li>
             </ul>
             <br />
-            <h4>Mire ajánljuk:</h4>
+            <h4>Recommended for:</h4>
             <ul>
-              <li>Meditációhoz, jógához, spirituális elmélyüléshez</li>
-              <li>Tértisztításhoz és nyugalmas légkör kialakításához</li>
-              <li>Belső fókusz megtalálásához egy rohanó napon</li>
-                
+              <li>Meditation, yoga, spiritual deepening</li>
+              <li>Space cleansing and creating a calm atmosphere</li>
+              <li>Finding inner focus on a busy day</li>
             </ul>
-                """;
+        """;
         sandalwood.setProductDescription(description2);
         sandalwood.setPrice(780);
         sandalwood.setCategories(new ArrayList<>(List.of(scents)));
@@ -140,14 +137,14 @@ public class DataInitializer {
         sandalwood.setImages(new ArrayList<>(List.of(img3)));
         productRepository.save(sandalwood);
 
-// Ayurveda
+        // Ayurveda
         Category ayurveda = new Category();
         ayurveda.setCategoryName("Ayurveda");
         categoryRepository.save(ayurveda);
 
         Product tongueCleaner = new Product();
-        tongueCleaner.setProductName("Réz nyelvkaparó");
-        tongueCleaner.setProductDescription("Az ayurvédikus higiénia eszköze a szájban lerakódott lepedék eltávolítására. Reggeli használata frissíti a leheletet és támogatja az emésztést.");
+        tongueCleaner.setProductName("Copper Tongue Cleaner");
+        tongueCleaner.setProductDescription("An Ayurvedic hygiene tool for removing residue from the tongue. Morning use freshens breath and supports digestion.");
         tongueCleaner.setPrice(1900);
         tongueCleaner.setCategories(new ArrayList<>(List.of(ayurveda)));
 
@@ -158,7 +155,6 @@ public class DataInitializer {
         tongueCleaner.setImages(new ArrayList<>(List.of(img4)));
         productRepository.save(tongueCleaner);
 
-
         // Vastu
         Category vastu = new Category();
         vastu.setCategoryName("Vastu");
@@ -166,7 +162,7 @@ public class DataInitializer {
 
         Product sriYantra = new Product();
         sriYantra.setProductName("Sri Yantra");
-        sriYantra.setProductDescription("A Sri Yantra a Vastu egyik legerősebb szimbóluma, amely a bőséget, spirituális fejlődést és harmonikus energiát hoz a térbe.");
+        sriYantra.setProductDescription("Sri Yantra is one of the strongest symbols of Vastu, bringing abundance, spiritual growth, and harmonious energy to the space.");
         sriYantra.setPrice(4500);
         sriYantra.setCategories(new ArrayList<>(List.of(vastu)));
 
@@ -175,17 +171,16 @@ public class DataInitializer {
         img5.setProduct(sriYantra);
 
         sriYantra.setImages(new ArrayList<>(List.of(img5)));
-
         productRepository.save(sriYantra);
 
-// Jóga
+        // Yoga
         Category yoga = new Category();
-        yoga.setCategoryName("Jóga");
+        yoga.setCategoryName("Yoga");
         categoryRepository.save(yoga);
 
         Product cushion = new Product();
-        cushion.setProductName("Meditációs párna");
-        cushion.setProductDescription("Természetes bio töltettel készült párna, amely stabil és kényelmes alátámasztást biztosít hosszabb ülő gyakorlatokhoz.");
+        cushion.setProductName("Meditation Cushion");
+        cushion.setProductDescription("A cushion made with natural bio filling that provides stable and comfortable support for longer seated practices.");
         cushion.setPrice(14500);
         cushion.setCategories(new ArrayList<>(List.of(yoga)));
 
@@ -194,17 +189,16 @@ public class DataInitializer {
         img6.setProduct(cushion);
 
         cushion.setImages(new ArrayList<>(List.of(img6)));
-
         productRepository.save(cushion);
 
-// Lakberendezés
+        // Home Decor
         Category home = new Category();
-        home.setCategoryName("Lakberendezés");
+        home.setCategoryName("Home Decor");
         categoryRepository.save(home);
 
         Product bedcover = new Product();
-        bedcover.setProductName("Mandala mintás ágyterítő");
-        bedcover.setProductDescription("Indiai pamut ágyterítő mandala mintával. Díszítő és funkcionális célokra is használható, 240x210 cm-es méret.");
+        bedcover.setProductName("Mandala Patterned Bedspread");
+        bedcover.setProductDescription("Indian cotton bedspread with mandala pattern. Can be used for both decorative and functional purposes, size 240x210 cm.");
         bedcover.setPrice(9500);
         bedcover.setCategories(new ArrayList<>(List.of(home)));
 
@@ -213,17 +207,16 @@ public class DataInitializer {
         img7.setProduct(bedcover);
 
         bedcover.setImages(new ArrayList<>(List.of(img7)));
-
         productRepository.save(bedcover);
 
-// Ruhák
+        // Clothing
         Category clothes = new Category();
-        clothes.setCategoryName("Ruhák");
+        clothes.setCategoryName("Clothing");
         categoryRepository.save(clothes);
 
         Product tunic = new Product();
-        tunic.setProductName("Női indiai tunika");
-        tunic.setProductDescription("Könnyű, légies és 100% pamut anyagból készült tunika, amely ideális nyári viseletként vagy jógázáshoz.");
+        tunic.setProductName("Women's Indian Tunic");
+        tunic.setProductDescription("Light, airy tunic made from 100% cotton, ideal for summer wear or yoga.");
         tunic.setPrice(9500);
         tunic.setCategories(new ArrayList<>(List.of(clothes)));
 
@@ -232,17 +225,16 @@ public class DataInitializer {
         img8.setProduct(tunic);
 
         tunic.setImages(new ArrayList<>(List.of(img8)));
-
         productRepository.save(tunic);
 
-// Ásványok
+        // Minerals
         Category minerals = new Category();
-        minerals.setCategoryName("Ásványok és ékszerek");
+        minerals.setCategoryName("Minerals and Jewelry");
         categoryRepository.save(minerals);
 
         Product bracelet = new Product();
-        bracelet.setProductName("Hegyi kristály karkötő");
-        bracelet.setProductDescription("A hegyi kristály tisztító és energetizáló hatásáról ismert ásvány. A karkötő a csuklón viselve támogatja a fókuszt és belső egyensúlyt.");
+        bracelet.setProductName("Clear Quartz Bracelet");
+        bracelet.setProductDescription("Clear quartz is known for its cleansing and energizing effects. Worn on the wrist, this bracelet supports focus and inner balance.");
         bracelet.setPrice(4500);
         bracelet.setCategories(new ArrayList<>(List.of(minerals)));
 
@@ -251,9 +243,7 @@ public class DataInitializer {
         img9.setProduct(bracelet);
 
         bracelet.setImages(new ArrayList<>(List.of(img9)));
-
         productRepository.save(bracelet);
-
     }
 
     private void createMembersWithRoles() {
@@ -285,10 +275,8 @@ public class DataInitializer {
             member.setLastName("Admin1");
             member.setEmail("admin@gmail.com");
             member.setPhoneNumber("06201234567");
-
             member.setRole(role);
             memberRepository.save(member);
         }
     }
-
 }
