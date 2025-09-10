@@ -2,6 +2,10 @@
 
 A full-stack webshop project built with modern technologies, developed for a real client and intended for live production use. The focus is on creating a secure, responsive, and containerized application that is easy to scale, extend, and maintain.
 
+<img width="1505" height="657" alt="Screenshot 2025-09-10 at 13 00 51" src="https://github.com/user-attachments/assets/e5512ec6-1c86-4f4c-ae17-69147e71dd28" />
+<img width="1503" height="693" alt="Screenshot 2025-09-10 at 13 01 18" src="https://github.com/user-attachments/assets/041d57e5-3bf3-4726-a9bf-07e59caf261a" />
+<img width="1505" height="506" alt="Screenshot 2025-09-10 at 13 01 38" src="https://github.com/user-attachments/assets/5ad65365-f998-41b7-a32a-a88a99c71c3f" />
+
 ## 🛠️ Built With
 
 - **Languages:**  
