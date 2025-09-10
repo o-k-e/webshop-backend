@@ -2,6 +2,20 @@
 
 A full-stack webshop project built with modern technologies, developed for a real client and intended for live production use. The focus is on creating a secure, responsive, and containerized application that is easy to scale, extend, and maintain.
 
+This project is **under active development** and intended for real deployment.
+
+### 🌐 Live Demo
+
+The webshop is deployed on [Render.com](https://render.com) and accessible at the following link:
+
+[https://webshop-frontend-wl0h.onrender.com](https://webshop-frontend-wl0h.onrender.com)
+
+> **Note:**  
+> The first load may take **up to 30–60 seconds**, especially if the app hasn’t been accessed in a while.  
+> This delay is due to [Render's free tier](https://render.com/docs/free#spin-down), which **automatically spins down inactive services** to save resources. When you revisit the site, it needs to "wake up" the backend and frontend containers before responding.
+<br />
+<br />
+
 <img width="1505" height="657" alt="Screenshot 2025-09-10 at 13 00 51" src="https://github.com/user-attachments/assets/e5512ec6-1c86-4f4c-ae17-69147e71dd28" />
 <img width="1503" height="693" alt="Screenshot 2025-09-10 at 13 01 18" src="https://github.com/user-attachments/assets/041d57e5-3bf3-4726-a9bf-07e59caf261a" />
 <img width="1505" height="506" alt="Screenshot 2025-09-10 at 13 01 38" src="https://github.com/user-attachments/assets/5ad65365-f998-41b7-a32a-a88a99c71c3f" />
@@ -64,74 +78,23 @@ A full-stack webshop project built with modern technologies, developed for a rea
 - View product details (public)
 - Admin login and role-based access
 - Admin dashboard
-- Create, update, delete products
+- Create, update, disable products
 - Upload and manage product images
-- Category-based filtering
-- Pagination (backend ready)
-- Login authentication (JWT)
+- Role-based UI rendering
+- Login authentication (JWT) - (planned to add OAUTH2) 
 - Form validation with react-hook-form + Zod
 - Auto token handling (AuthContext + interceptor)
+- Global state management with Zustand:
+Used to store and manage product query parameters such as search term, selected category, sort options, page number, and limit – enabling consistent filtering and pagination across components.
 
-## 📂 Folder Structure (Frontend)
+<img width="1030" height="809" alt="Screenshot 2025-09-11 at 00 14 51" src="https://github.com/user-attachments/assets/41770062-ec6a-4ef6-abe1-e14d758ca195" />
 
-```
-src/
-├── components/
-├── context/           # AuthContext, Providers
-├── hooks/             # useAuth, useUser, useLocalStorage, etc.
-├── layouts/           # UserLayout, AdminLayout
-├── pages/             # Home, Login, AdminDashboard, etc.
-├── services/          # api-client, fileUploader
-├── types/             # TypeScript types
-├── App.tsx
-└── main.tsx
-```
-
-## 🚀 Getting Started (Frontend)
-
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Start the dev server:
-   ```bash
-   npm run dev
-   ```
-
-3. Make sure the backend is also running at:
-   ```
-   http://localhost:8080
-   ```
-
-## 🔐 Login Info
-
-Use Postman to log in via:
-```
-POST http://localhost:8080/api/auth/login
-```
-
-Then set token manually in browser:
-```js
-localStorage.setItem('token', 'YOUR_JWT_TOKEN_HERE');
-```
-
-Admin user (example):
-```json
-{
-  "username": "admin",
-  "password": "Admin123"
-}
-```
 
 ## 🧪 To Do
 
-- Product search
 - Product stock quantity
 - Cart and checkout logic
 - Responsive admin dashboard
-- Full mobile support
-- Role-based UI rendering
 - Deployment to Vercel / Railway
 
 ---
