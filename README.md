@@ -4,6 +4,8 @@ A full-stack webshop project built with modern technologies, developed for a rea
 
 This project is **under active development** and intended for real deployment.
 
+<br />
+
 ### 🌐 Live Demo
 
 The webshop is deployed on [Render.com](https://render.com) and accessible at the following link:
@@ -19,6 +21,8 @@ The webshop is deployed on [Render.com](https://render.com) and accessible at th
 <img width="1505" height="657" alt="Screenshot 2025-09-10 at 13 00 51" src="https://github.com/user-attachments/assets/e5512ec6-1c86-4f4c-ae17-69147e71dd28" />
 <img width="1503" height="693" alt="Screenshot 2025-09-10 at 13 01 18" src="https://github.com/user-attachments/assets/041d57e5-3bf3-4726-a9bf-07e59caf261a" />
 <img width="1505" height="506" alt="Screenshot 2025-09-10 at 13 01 38" src="https://github.com/user-attachments/assets/5ad65365-f998-41b7-a32a-a88a99c71c3f" />
+
+<br />
 
 ## 🛠️ Built With
 
@@ -37,9 +41,6 @@ The webshop is deployed on [Render.com](https://render.com) and accessible at th
 - **Database:**  
   [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-- **Containerization:**  
-  [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-
 - **Backend:**  
   [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/projects/spring-boot)
 
@@ -47,9 +48,6 @@ The webshop is deployed on [Render.com](https://render.com) and accessible at th
   [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)  
   [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)  
   [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-
-- **Database:**  
-  [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
 - **Containerization:**  
   [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)  
@@ -66,29 +64,34 @@ The webshop is deployed on [Render.com](https://render.com) and accessible at th
   ![Git](https://img.shields.io/badge/Version%20Control-Git-orange?style=for-the-badge&logo=git)
 ![GitHub](https://img.shields.io/badge/Repo-GitHub-black?style=for-the-badge&logo=github)
 
+<br />
+
 ## Contact
 
 - **Erika Oláhné Klár:**  
   [![GitHub](https://img.shields.io/badge/GitHub-%2312100E.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/o-k-e)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/erika-olahne-klar/)
 
+<br />
 
 ## ✨ Features
 
 - Browse all products (public)
 - View product details (public)
-- Admin login and role-based access
-- Admin dashboard
-- Create, update, disable products
-- Upload and manage product images
+- Global state management with Zustand:
+Used to store and manage product query parameters such as search term, selected category, sort options, page number, and limit – enabling consistent filtering and pagination across components.
 - Role-based UI rendering
 - Login authentication (JWT) - (planned to add OAUTH2) 
 - Form validation with react-hook-form + Zod
 - Auto token handling (AuthContext + interceptor)
-- Global state management with Zustand:
-Used to store and manage product query parameters such as search term, selected category, sort options, page number, and limit – enabling consistent filtering and pagination across components.
+- Admin login and role-based access
+- Admin dashboard
+- Create, update, disable products
+- Upload and manage product images
+<br />
 
 <img width="1030" height="809" alt="Screenshot 2025-09-11 at 00 14 51" src="https://github.com/user-attachments/assets/41770062-ec6a-4ef6-abe1-e14d758ca195" />
 
+<br />
 
 ## 🧪 To Do
 
