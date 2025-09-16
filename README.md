@@ -6,21 +6,8 @@ This project is **under active development** and intended for real deployment.
 
 <br />
 
-<details>
-  <summary>Table of Contents</summary>
 
-- [🌐 Live Demo](#-live-demo)
-- [About the Project](#about-the-project)
-- [Built With](#built-with)
-- [✨ Features](#-features)
-- [🧪 To Do](#-to-do)
-- [Contact](#contact)
-
-</details>
-<br />
-
-
-### 🌐 Live Demo
+## 🌐 Live Demo
 
 The webshop is deployed on [Render.com](https://render.com) and accessible at the following link:
 
@@ -29,7 +16,6 @@ The webshop is deployed on [Render.com](https://render.com) and accessible at th
 > **Note:**  
 > The first load may take **up to 30–60 seconds**, especially if the app hasn’t been accessed in a while.  
 > This delay is due to [Render's free tier](https://render.com/docs/free#spin-down), which **automatically spins down inactive services** to save resources. When you revisit the site, it needs to "wake up" the backend and frontend containers before responding.
-<br />
 
 ### 🔐 Access & Login Info
 
@@ -49,6 +35,7 @@ Once logged in, you will be redirected to the protected admin interface.
 
 > 🔒 Note: Only the **New Product** functionality is currently available. Other admin features are under development.
 <br />
+
 ## About the Project
 
 This project is a **work in progress** full-stack webshop built for a real deployment scenario.  
@@ -60,6 +47,7 @@ Once completed, it will include product management, authentication, and a respon
 <img width="1505" height="506" alt="Screenshot 2025-09-10 at 13 01 38" src="https://github.com/user-attachments/assets/5ad65365-f998-41b7-a32a-a88a99c71c3f" />
 
 <br />
+
 
 ## 🛠️ Built With
 
