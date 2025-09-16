@@ -244,6 +244,234 @@ public class DataInitializer {
 
         bracelet.setImages(new ArrayList<>(List.of(img9)));
         productRepository.save(bracelet);
+
+        // Scents - Dummy product
+        Product roseDeluxe = new Product();
+        roseDeluxe.setProductName("Rose Incense Deluxe");
+        roseDeluxe.setProductDescription(description); // reuse original description
+        roseDeluxe.setPrice(880); // slight variation
+        roseDeluxe.setCategories(new ArrayList<>(List.of(scents)));
+
+        ProductImage img1Dup = new ProductImage();
+        img1Dup.setUrl("rozsa-fustolo-1.1.jpeg");
+        img1Dup.setProduct(roseDeluxe);
+
+        ProductImage img2Dup = new ProductImage();
+        img2Dup.setUrl("rozsa-fustolo-1.2.jpeg");
+        img2Dup.setProduct(roseDeluxe);
+
+        roseDeluxe.setImages(new ArrayList<>(List.of(img1Dup, img2Dup)));
+        productRepository.save(roseDeluxe);
+
+// Scents - Dummy product 2
+        Product sandalwoodClassic = new Product();
+        sandalwoodClassic.setProductName("Sandalwood Incense Classic");
+        sandalwoodClassic.setProductDescription(description2);
+        sandalwoodClassic.setPrice(820);
+        sandalwoodClassic.setCategories(new ArrayList<>(List.of(scents)));
+
+        ProductImage img3Dup = new ProductImage();
+        img3Dup.setUrl("incense-sandalwood-1.1.jpeg");
+        img3Dup.setProduct(sandalwoodClassic);
+
+        sandalwoodClassic.setImages(new ArrayList<>(List.of(img3Dup)));
+        productRepository.save(sandalwoodClassic);
+
+// Ayurveda - Dummy product
+        Product tongueCleanerPlus = new Product();
+        tongueCleanerPlus.setProductName("Copper Tongue Cleaner Plus");
+        tongueCleanerPlus.setProductDescription("A premium version of the classic Ayurvedic tongue scraper, slightly wider and thicker for extra durability.");
+        tongueCleanerPlus.setPrice(2100);
+        tongueCleanerPlus.setCategories(new ArrayList<>(List.of(ayurveda)));
+
+        ProductImage img4Dup = new ProductImage();
+        img4Dup.setUrl("rez-nyelvkaparo.jpeg");
+        img4Dup.setProduct(tongueCleanerPlus);
+
+        tongueCleanerPlus.setImages(new ArrayList<>(List.of(img4Dup)));
+        productRepository.save(tongueCleanerPlus);
+
+// Vastu - Dummy product
+        Product sriYantraMini = new Product();
+        sriYantraMini.setProductName("Sri Yantra Mini");
+        sriYantraMini.setProductDescription("A smaller version of the Sri Yantra, ideal for desks or meditation corners. Brings harmony and focus.");
+        sriYantraMini.setPrice(3500);
+        sriYantraMini.setCategories(new ArrayList<>(List.of(vastu)));
+
+        ProductImage img5Dup = new ProductImage();
+        img5Dup.setUrl("sri-yantra.jpeg");
+        img5Dup.setProduct(sriYantraMini);
+
+        sriYantraMini.setImages(new ArrayList<>(List.of(img5Dup)));
+        productRepository.save(sriYantraMini);
+
+// Yoga - Dummy product
+        Product cushionEco = new Product();
+        cushionEco.setProductName("Eco Meditation Cushion");
+        cushionEco.setProductDescription("An eco-conscious version made with recycled materials and organic cotton cover.");
+        cushionEco.setPrice(13900);
+        cushionEco.setCategories(new ArrayList<>(List.of(yoga)));
+
+        ProductImage img6Dup = new ProductImage();
+        img6Dup.setUrl("meditacios-parna.jpeg");
+        img6Dup.setProduct(cushionEco);
+
+        cushionEco.setImages(new ArrayList<>(List.of(img6Dup)));
+        productRepository.save(cushionEco);
+
+// Home Decor - Dummy product
+        Product bedcoverMandalaGold = new Product();
+        bedcoverMandalaGold.setProductName("Mandala Gold Bedspread");
+        bedcoverMandalaGold.setProductDescription("Limited edition golden-tone mandala patterned cotton bedspread. Size: 240x210 cm.");
+        bedcoverMandalaGold.setPrice(9900);
+        bedcoverMandalaGold.setCategories(new ArrayList<>(List.of(home)));
+
+        ProductImage img7Dup = new ProductImage();
+        img7Dup.setUrl("mandala-mintas-agyterito.jpeg");
+        img7Dup.setProduct(bedcoverMandalaGold);
+
+        bedcoverMandalaGold.setImages(new ArrayList<>(List.of(img7Dup)));
+        productRepository.save(bedcoverMandalaGold);
+
+// Clothing - Dummy product
+        Product tunicFloral = new Product();
+        tunicFloral.setProductName("Floral Cotton Tunic");
+        tunicFloral.setProductDescription("Soft cotton tunic with subtle floral prints. Ideal for casual wear and summer yoga.");
+        tunicFloral.setPrice(9200);
+        tunicFloral.setCategories(new ArrayList<>(List.of(clothes)));
+
+        ProductImage img8Dup = new ProductImage();
+        img8Dup.setUrl("noi-indiai-tunika.jpeg");
+        img8Dup.setProduct(tunicFloral);
+
+        tunicFloral.setImages(new ArrayList<>(List.of(img8Dup)));
+        productRepository.save(tunicFloral);
+
+// Minerals - Dummy product
+        Product braceletDeluxe = new Product();
+        braceletDeluxe.setProductName("Clear Quartz Bracelet Deluxe");
+        braceletDeluxe.setProductDescription("Enhanced design with polished clear quartz beads. Supports focus and adds elegant energy to any outfit.");
+        braceletDeluxe.setPrice(4900);
+        braceletDeluxe.setCategories(new ArrayList<>(List.of(minerals)));
+
+        ProductImage img9Dup = new ProductImage();
+        img9Dup.setUrl("hegyikristaly-karkoto.jpeg");
+        img9Dup.setProduct(braceletDeluxe);
+
+        braceletDeluxe.setImages(new ArrayList<>(List.of(img9Dup)));
+        productRepository.save(braceletDeluxe);
+
+        // Scents - Dummy product
+        Product roseMini = new Product();
+        roseMini.setProductName("Rose Incense Mini");
+        roseMini.setProductDescription("A smaller pack of the beloved rose incense – same calming floral scent, now in a travel-friendly size.");
+        roseMini.setPrice(590);
+        roseMini.setCategories(new ArrayList<>(List.of(scents)));
+
+        ProductImage img1Mini = new ProductImage();
+        img1Mini.setUrl("rozsa-fustolo-1.1.jpeg");
+        img1Mini.setProduct(roseMini);
+
+        roseMini.setImages(new ArrayList<>(List.of(img1Mini)));
+        productRepository.save(roseMini);
+
+// Scents - Dummy product
+        Product sandalwoodSoft = new Product();
+        sandalwoodSoft.setProductName("Sandalwood Soft Aroma");
+        sandalwoodSoft.setProductDescription("A milder version of the sandalwood scent, ideal for those who prefer subtle spiritual fragrances.");
+        sandalwoodSoft.setPrice(750);
+        sandalwoodSoft.setCategories(new ArrayList<>(List.of(scents)));
+
+        ProductImage img3Soft = new ProductImage();
+        img3Soft.setUrl("incense-sandalwood-1.1.jpeg");
+        img3Soft.setProduct(sandalwoodSoft);
+
+        sandalwoodSoft.setImages(new ArrayList<>(List.of(img3Soft)));
+        productRepository.save(sandalwoodSoft);
+
+// Ayurveda - Dummy product
+        Product tongueCleanerPro = new Product();
+        tongueCleanerPro.setProductName("Copper Tongue Cleaner Pro");
+        tongueCleanerPro.setProductDescription("Upgraded Ayurvedic tongue cleaner with ergonomic grip and premium polish finish.");
+        tongueCleanerPro.setPrice(2300);
+        tongueCleanerPro.setCategories(new ArrayList<>(List.of(ayurveda)));
+
+        ProductImage img4Pro = new ProductImage();
+        img4Pro.setUrl("rez-nyelvkaparo.jpeg");
+        img4Pro.setProduct(tongueCleanerPro);
+
+        tongueCleanerPro.setImages(new ArrayList<>(List.of(img4Pro)));
+        productRepository.save(tongueCleanerPro);
+
+// Vastu - Dummy product
+        Product sriYantraWall = new Product();
+        sriYantraWall.setProductName("Sri Yantra Wall Decor");
+        sriYantraWall.setProductDescription("Wall-hanging version of the sacred Sri Yantra, handmade with golden accents for spiritual ambiance.");
+        sriYantraWall.setPrice(4800);
+        sriYantraWall.setCategories(new ArrayList<>(List.of(vastu)));
+
+        ProductImage img5Wall = new ProductImage();
+        img5Wall.setUrl("sri-yantra.jpeg");
+        img5Wall.setProduct(sriYantraWall);
+
+        sriYantraWall.setImages(new ArrayList<>(List.of(img5Wall)));
+        productRepository.save(sriYantraWall);
+
+// Yoga - Dummy product
+        Product cushionBasic = new Product();
+        cushionBasic.setProductName("Basic Meditation Cushion");
+        cushionBasic.setProductDescription("Simple and supportive meditation cushion for beginners. Budget-friendly, filled with natural husk.");
+        cushionBasic.setPrice(9900);
+        cushionBasic.setCategories(new ArrayList<>(List.of(yoga)));
+
+        ProductImage img6Basic = new ProductImage();
+        img6Basic.setUrl("meditacios-parna.jpeg");
+        img6Basic.setProduct(cushionBasic);
+
+        cushionBasic.setImages(new ArrayList<>(List.of(img6Basic)));
+        productRepository.save(cushionBasic);
+
+// Home Decor - Dummy product
+        Product bedcoverClassic = new Product();
+        bedcoverClassic.setProductName("Classic Mandala Bedspread");
+        bedcoverClassic.setProductDescription("Traditional Indian bedcover with vibrant mandala design. Ideal for bedrooms, sofas, or wall decor.");
+        bedcoverClassic.setPrice(9400);
+        bedcoverClassic.setCategories(new ArrayList<>(List.of(home)));
+
+        ProductImage img7Classic = new ProductImage();
+        img7Classic.setUrl("mandala-mintas-agyterito.jpeg");
+        img7Classic.setProduct(bedcoverClassic);
+
+        bedcoverClassic.setImages(new ArrayList<>(List.of(img7Classic)));
+        productRepository.save(bedcoverClassic);
+
+// Clothing - Dummy product
+        Product tunicSummer = new Product();
+        tunicSummer.setProductName("Summer Breeze Tunic");
+        tunicSummer.setProductDescription("Lightweight Indian tunic with summer pattern – perfect for hot days and spiritual practices.");
+        tunicSummer.setPrice(9100);
+        tunicSummer.setCategories(new ArrayList<>(List.of(clothes)));
+
+        ProductImage img8Summer = new ProductImage();
+        img8Summer.setUrl("noi-indiai-tunika.jpeg");
+        img8Summer.setProduct(tunicSummer);
+
+        tunicSummer.setImages(new ArrayList<>(List.of(img8Summer)));
+        productRepository.save(tunicSummer);
+
+// Minerals - Dummy product
+        Product braceletEnergy = new Product();
+        braceletEnergy.setProductName("Energy Quartz Bracelet");
+        braceletEnergy.setProductDescription("Clear quartz bracelet infused with vibrant energy – handmade with love to support clarity and strength.");
+        braceletEnergy.setPrice(4700);
+        braceletEnergy.setCategories(new ArrayList<>(List.of(minerals)));
+
+        ProductImage img9Energy = new ProductImage();
+        img9Energy.setUrl("hegyikristaly-karkoto.jpeg");
+        img9Energy.setProduct(braceletEnergy);
+
+        braceletEnergy.setImages(new ArrayList<>(List.of(img9Energy)));
+        productRepository.save(braceletEnergy);
     }
 
     private void createMembersWithRoles() {
