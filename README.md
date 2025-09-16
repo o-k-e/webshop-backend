@@ -13,11 +13,6 @@ This project is **under active development** and intended for real deployment.
 - [About the Project](#about-the-project)
 - [Built With](#built-with)
 - [✨ Features](#-features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation Steps](#installation-steps)
-  - [Access the Application](#access-the-application)
-  - [Stop the Application](#stop-the-application)
 - [🧪 To Do](#-to-do)
 - [Contact](#contact)
 
@@ -36,6 +31,24 @@ The webshop is deployed on [Render.com](https://render.com) and accessible at th
 > This delay is due to [Render's free tier](https://render.com/docs/free#spin-down), which **automatically spins down inactive services** to save resources. When you revisit the site, it needs to "wake up" the backend and frontend containers before responding.
 <br />
 
+### 🔐 Access & Login Info
+
+You can freely browse all **public user pages** (e.g. product listings, search, details) without logging in.
+
+To access the **admin dashboard**, authentication is required.  
+Use the following default admin credentials:
+
+```json
+{
+  "username": "admin",
+  "password": "Admin1@34"
+}
+```
+
+Once logged in, you will be redirected to the protected admin interface.
+
+> 🔒 Note: Only the **New Product** functionality is currently available. Other admin features are under development.
+<br />
 ## About the Project
 
 This project is a **work in progress** full-stack webshop built for a real deployment scenario.  
