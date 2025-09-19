@@ -51,20 +51,27 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        // Product admin operations
                         .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN")
 
+                        // Image admin operations
                         .requestMatchers(HttpMethod.POST, "/images/upload-image").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.DELETE, "/images/*").hasRole("ADMIN")
+
+                        // Category admin operations
                         .requestMatchers(HttpMethod.POST, "/api/categories").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/categories/**").hasRole("ADMIN")
 
+                        // Public endpoints
                         .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/products/search").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/products/paginated").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/categories/{id}/products").permitAll()
-
 //                        .requestMatchers(HttpMethod.GET, "/api/categories").permitAll()
+
+                        // Auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().permitAll());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
