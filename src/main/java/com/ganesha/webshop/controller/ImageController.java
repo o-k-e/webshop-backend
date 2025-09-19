@@ -2,6 +2,7 @@ package com.ganesha.webshop.controller;
 
 import com.ganesha.webshop.model.dto.request.Base64ImageUploadRequest;
 import com.ganesha.webshop.model.dto.response.ImageFilenameResponse;
+import com.ganesha.webshop.model.dto.response.SuccessResponse;
 import com.ganesha.webshop.service.FileUploaderService;
 import com.ganesha.webshop.service.ImageService;
 import lombok.RequiredArgsConstructor;
@@ -56,5 +57,10 @@ public class ImageController {
         String uploadedFilename = fileUploaderService.upload(request.filename(), request.base64());
         ImageFilenameResponse imageFilenameResponse = new ImageFilenameResponse(uploadedFilename);
         return ResponseEntity.status(HttpStatus.CREATED).body(imageFilenameResponse);
+    }
+
+    @DeleteMapping("/images/{id}")
+    public SuccessResponse deleteImage(@PathVariable Long id) {
+        return imageService.deleteImageById(id);
     }
 }
