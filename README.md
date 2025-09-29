@@ -1,9 +1,8 @@
 # 🛒 Ganesha Webshop
 
 <br />
-
-<img width="1505" height="657" alt="Screenshot 2025-09-10 at 13 00 51" src="https://github.com/user-attachments/assets/e5512ec6-1c86-4f4c-ae17-69147e71dd28" />
-<img width="1011" height="763" alt="Screenshot 2025-09-22 at 19 48 07" src="https://github.com/user-attachments/assets/8ae9ddf4-64b5-49f9-9c0e-b63feaf62fa6" />
+<img width="1105" height="689" alt="ganesha-landing-page-hero" src="https://github.com/user-attachments/assets/be20d38c-0485-468f-817e-5acc8343a7da" />
+<img width="1104" height="822" alt="ganesha-landing-page-products" src="https://github.com/user-attachments/assets/b336aba5-b552-4b5d-ab7a-64eac6420dc8" />
 
 <br />
 <br />
@@ -76,11 +75,11 @@ This project is a **work in progress** full-stack webshop built for a real deplo
 
 - **Image Handling:** Local storage (Cloudinary planned for production)  
   ![Local Storage](https://img.shields.io/badge/Image%20Handling-Local%20Storage-blue?style=for-the-badge)
-![Cloudinary](https://img.shields.io/badge/Cloudinary-Planned-lightgrey?style=for-the-badge&logo=cloudinary)
+  ![Cloudinary](https://img.shields.io/badge/Cloudinary-Planned-lightgrey?style=for-the-badge&logo=cloudinary)
 
 - **Version Control:**  
   ![Git](https://img.shields.io/badge/Version%20Control-Git-orange?style=for-the-badge&logo=git)
-![GitHub](https://img.shields.io/badge/Repo-GitHub-black?style=for-the-badge&logo=github)
+  ![GitHub](https://img.shields.io/badge/Repo-GitHub-black?style=for-the-badge&logo=github)
 
 <br />
 
@@ -114,11 +113,15 @@ This project is a **work in progress** full-stack webshop built for a real deplo
 - **DevOps & Deployment**
   - Fully containerized with **Docker** + NGINX reverse proxy
   - Deployed on **Render.com**
+    <br />
+
+### Example: Admin - All Products and Update Product
+
+<img width="1073" height="805" alt="ganesha-admin-landing-page" src="https://github.com/user-attachments/assets/82c5054d-b962-410f-af1b-85881b48037b" />
 <br />
-
-### Example: Admin - Add New Product
-
-<img width="1030" height="809" alt="Screenshot 2025-09-11 at 00 14 51" src="https://github.com/user-attachments/assets/41770062-ec6a-4ef6-abe1-e14d758ca195" />
+<br />
+<br />
+<img width="884" height="812" alt="ganesha-product-update" src="https://github.com/user-attachments/assets/e51ff44a-da28-4c84-9827-9a72e170877a" />
 
 <br />
 
@@ -128,9 +131,9 @@ This project is a **work in progress** full-stack webshop built for a real deplo
   - Implement product stock quantity
   - Add cart and checkout logic (with order summary & persistence)
 
-- **Admin Panel**
-  - Improve responsiveness of the dashboard
-  - Add product bulk actions (optional)
+- **Admin Panel - Dashboard**
+  - Overview of product count, categories, and recent activity
+  - Dashboard statistics (orders, user activity – future scope)
 
 - **Authentication**
   - Integrate **OAUTH2** login (e.g. Google)
@@ -146,8 +149,6 @@ This project is a **work in progress** full-stack webshop built for a real deplo
 
 
 ## Contact
-
-Feel free to reach out for feedback, collaboration, or questions about this project:
 
 - **Erika Oláhné Klár:**  
   [![GitHub](https://img.shields.io/badge/GitHub-%2312100E.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/o-k-e)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/erika-olahne-klar/)
