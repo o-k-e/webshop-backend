@@ -114,6 +114,7 @@ This project is a **work in progress** full-stack webshop built for a real deplo
   - Fully containerized with **Docker** + NGINX reverse proxy
   - Deployed on **Render.com**
     <br />
+    <br />
 
 ### Example: Admin - All Products and Update Product
 
