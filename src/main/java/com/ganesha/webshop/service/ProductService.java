@@ -100,6 +100,7 @@ public class ProductService {
         productToUpdate.setProductName(updateProductRequest.productName());
         productToUpdate.setProductDescription(updateProductRequest.productDescription());
         productToUpdate.setPrice(updateProductRequest.price());
+        productToUpdate.setQuantity(updateProductRequest.quantity());
 
         List<Category> categories = findCategoriesOfProduct(updateProductRequest);
         productToUpdate.setCategories(categories);
