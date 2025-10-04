@@ -26,6 +26,8 @@ public class ProductResponseMapper {
                 product.getProductName(),
                 product.getProductDescription(),
                 product.getPrice(),
+                product.getQuantity(),
+                product.getQuantity() > 0,
                 categoryWithIdAndNameResponseMapper.mapToCategoryResponseListWithIdAndName(product.getCategories()),
                 productImageResponseMapper.mapToListOfProductImageResponse(product)
                 );

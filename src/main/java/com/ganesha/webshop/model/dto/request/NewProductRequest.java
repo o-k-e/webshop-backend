@@ -1,9 +1,6 @@
 package com.ganesha.webshop.model.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -17,6 +14,9 @@ public record NewProductRequest(
 
         @Positive(message = "Price must be a positive number.")
         double price,
+
+        @PositiveOrZero(message = "Quantity must be 0 or more.")
+        int quantity,
 
         @NotEmpty(message = "At least one category must be selected.")
         List<@NotNull Long> categoryIds,

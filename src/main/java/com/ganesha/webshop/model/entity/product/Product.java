@@ -29,6 +29,9 @@ public class Product {
     @Column(nullable = false)
     private double price;
 
+    @Column(nullable = false)
+    private int quantity;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -38,7 +41,5 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) //mappedBy = "product" -> ProductImage.java -> private Product product
     @OrderBy("id ASC")
     private List<ProductImage> images = new ArrayList<>();
-
-
 
 }

@@ -18,6 +18,7 @@ public class NewProductMapper {
         product.setProductName(newProductRequest.productName());
         product.setProductDescription(newProductRequest.description());
         product.setPrice(newProductRequest.price());
+        product.setQuantity(newProductRequest.quantity());
         product.setCategories(new ArrayList<>(categories));
 
         List<ProductImage> images = newProductRequest.imageFileNames().stream().map(fileName -> {
